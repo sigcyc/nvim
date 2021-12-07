@@ -5,7 +5,7 @@ Plug 'phaazon/hop.nvim'
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/tagbar'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
@@ -15,7 +15,7 @@ call plug#end()
 
 set guifont=Monaco:h14
 set splitbelow
-set smartcase
+set ignorecase
 set number relativenumber
 let mapleader=","
 
@@ -70,6 +70,10 @@ tnoremap <D-,> <C-\><C-N>2<C-w><
 noremap <D-e> :sp <Bar> term<CR>i
 noremap <D-n> i
 tnoremap <D-n> <C-\><C-N>
+nmap <D-r> yap<C-w>jpi<CR><D-k>}j
+"run class and function. need ac af for function setup
+nmap <D-u> mz"+yaf<C-w>ji%paste<CR><D-k>'z
+nmap <D-c> mz"+yac<C-w>ji%paste<CR><D-k>'z
 
 "--- plugins ---
 " hop
@@ -114,6 +118,7 @@ require'nvim-treesitter.configs'.setup {
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
+	["ab"] = "@block.outer"
       },
     },
   },

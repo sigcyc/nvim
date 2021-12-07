@@ -1,6 +1,6 @@
 # Neovim setup
 
-# Install vim
+# install vim
 First step: install neovim, neovim-qt
 Brew install neovim
 Brew install neovim-qt
@@ -26,9 +26,12 @@ end)
 ### Terminal shortcuts
 
 ## Plugins
-use vim-plug for management
+First step, use vim-plug for management
+Download plug.vim and put it in the autoload directory```
+.local/share/nvim/site/autoload/plug.vim
+```
 
-### lua plugin
+### instructions for lua plugin
 To run the lua command in vimscript, call
 ```
 lua << EOF
