@@ -23,8 +23,14 @@ hs.hotkey.bind("cmd", 'h', function()
         hs.eventtap.keyStroke({}, "h", 0)
 end)
 ```
+### linux system clipboard
+neovim doesn't provide clipboard support. need to install xclip locally
+See the [issue](https://discourse.nixos.org/t/how-to-support-clipboard-for-neovim/9534) and the [installation](https://discourse.nixos.org/t/how-to-support-clipboard-for-neovim/9534)
+
 ### Terminal shortcuts
 We have the following convention: when we focus on a terminal buffer, the terminal buffer will automatically change into terminal mode. When we focus on another buffer, the terminal buffer will be in insert mode 
+
+[Do not leave on mouse click](https://github.com/neovim/neovim/pull/16604)
 
 ## Plugins
 First step, use vim-plug for management
