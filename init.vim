@@ -94,6 +94,9 @@ autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif
 tmap <D-r> <C-\><C-N>pi 
 tmap <D-'> <C-\><C-N>"+pi
 
+" editting
+nnoremap <Leader>s :.,$s/
+
 "--- plugins ---
 " hop
 lua require('plugins/hop')

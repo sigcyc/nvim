@@ -28,7 +28,8 @@ We have the following convention: when we focus on a terminal buffer, the termin
 
 ## Plugins
 First step, use vim-plug for management
-Download plug.vim and put it in the autoload directory```
+Download plug.vim and put it in the autoload directory
+```
 .local/share/nvim/site/autoload/plug.vim
 ```
 
