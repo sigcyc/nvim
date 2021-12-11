@@ -1,5 +1,5 @@
 require'nvim-treesitter.configs'.setup {
-  hightlight = { enable = true },
+  highlight = { enable = true },
   incremental_selection = { enable = true },
   textobjects = {
     select = {
