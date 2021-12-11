@@ -24,6 +24,7 @@ hs.hotkey.bind("cmd", 'h', function()
 end)
 ```
 ### Terminal shortcuts
+We have the following convention: when we focus on a terminal buffer, the terminal buffer will automatically change into terminal mode. When we focus on another buffer, the terminal buffer will be in insert mode 
 
 ## Plugins
 First step, use vim-plug for management
@@ -46,6 +47,9 @@ nerdtree : potential replacement by nvim-tree?
 Requirement: install universal-ctags
 #### coc.nvim
 Requirement: install node
+Install plugins:
+:CocInstall coc-json coc-tsserver
+:CocInstall coc-pyright
 #### fzf
 Requirement: install `the_silver_searcher`
 #### nvim-treesitter-textobjects

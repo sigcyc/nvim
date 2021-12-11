@@ -11,8 +11,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-lualine/lualine.nvim'
 call plug#end()
 
+set tabstop=3
+set shiftwidth=3
+set expandtab
+set smarttab
 set guifont=Monaco:h14
 set splitbelow
 set ignorecase
@@ -49,37 +54,49 @@ noremap <D-=> <C-w>=
 noremap <D-\> <C-w><Bar>
 noremap <D-.> 2<C-w>>
 noremap <D-,> 2<C-w><
+noremap <D-Left> gT 
+noremap <D-Right> gt
 
 tnoremap <D-w> <C-\><C-N>:hid<CR>
 tnoremap <D-q> <C-\><C-N>:q<CR>
-tnoremap <D-v> <C-\><C-N>:vsplit<CR>
-tnoremap <D-i> <C-\><C-N>:split<CR>
-tnoremap <D-t> <C-\><C-N>:tabnew<CR>
-tnoremap <D-x> <C-\><C-N><C-w>x
-tnoremap <D-H> <C-\><C-N><C-w>H
-tnoremap <D-J> <C-\><C-N><C-w>J
-tnoremap <D-K> <C-\><C-N><C-w>K
-tnoremap <D-L> <C-\><C-N><C-w>L
-tnoremap <D--> <C-\><C-N><C-w>_
-tnoremap <D-=> <C-\><C-N><C-w>=
-tnoremap <D-\> <C-\><C-N><C-w><Bar>
-tnoremap <D-.> <C-\><C-N>2<C-w>>
-tnoremap <D-,> <C-\><C-N>2<C-w><
+tnoremap <D-v> <C-\><C-N>:vsplit<CR>i
+tnoremap <D-i> <C-\><C-N>:split<CR>i
+tnoremap <D-t> <C-\><C-N>:tabnew<CR>i
+tnoremap <D-x> <C-\><C-N><C-w>xi
+tnoremap <D-H> <C-\><C-N><C-w>Hi
+tnoremap <D-J> <C-\><C-N><C-w>Ji
+tnoremap <D-K> <C-\><C-N><C-w>Ki
+tnoremap <D-L> <C-\><C-N><C-w>Li
+tnoremap <D--> <C-\><C-N><C-w>_i
+tnoremap <D-=> <C-\><C-N><C-w>=i
+tnoremap <D-\> <C-\><C-N><C-w><Bar>i
+tnoremap <D-.> <C-\><C-N>2<C-w>>i
+tnoremap <D-,> <C-\><C-N>2<C-w><i
+tnoremap <D-Left> <C-\><C-N>gT 
+tnoremap <D-Right> <C-\><C-N>gt
 
 " terminal
 noremap <D-e> :sp <Bar> term<CR>i
 noremap <D-n> i
 tnoremap <D-n> <C-\><C-N>
+autocmd BufEnter * if &buftype ==# 'terminal' |:startinsert| endif 
+
+
+"run a block of code
 nmap <D-r> yap<C-w>jpi<CR><D-k>}j
 "run class and function. need ac af for function setup
 nmap <D-u> mz"+yaf<C-w>ji%paste<CR><D-k>'z
 nmap <D-c> mz"+yac<C-w>ji%paste<CR><D-k>'z
 
+" clipboard path
+noremap <Leader>cw :let t:wd = getcwd()<CR>
+autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif
+tmap <D-r> <C-\><C-N>pi 
+tmap <D-'> <C-\><C-N>"+pi
+
 "--- plugins ---
 " hop
-lua << EOF
-require('hop').setup()
-EOF
+lua require('plugins/hop')
 noremap <Leader>w :HopWordAC<CR>
 noremap <Leader>b :HopWordBC<CR>
 " nerdtree
@@ -105,22 +122,84 @@ noremap <Leader>gs :Git<CR>
 noremap <Leader>dq :<C-U>call fugitive#DiffClose()<CR>
 noremap <Leader>dv :Gvdiffsplit<CR>
 
-" treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  textobjects = {
-    select = {
-      enable = true,
-      -- Automatically jump forward to textobj, similar to targets.vim 
-      lookahead = true,
-      keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-	["ab"] = "@block.outer"
-      },
-    },
-  },
-}
-EOF
+lua require('plugins/nvim-treesitter')
+lua require('plugins/lualine')
+
+" coc nvim
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
