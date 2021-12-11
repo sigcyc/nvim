@@ -11,7 +11,7 @@ require'nvim-treesitter.configs'.setup {
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
-	["ab"] = "@block.outer"
+		  ["as"] = "@statement.outer"
       },
     },
   },
