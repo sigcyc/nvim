@@ -49,8 +49,10 @@ Requirement: install universal-ctags
 #### coc.nvim
 Requirement: install node
 Install plugins:
+```
 :CocInstall coc-json coc-tsserver
 :CocInstall coc-pyright
+```
 #### fzf
 Requirement: install `the_silver_searcher`
 #### nvim-treesitter-textobjects
