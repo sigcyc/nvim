@@ -1,9 +1,24 @@
 # Neovim setup
 
-# install vim
+## install vim
 First step: install neovim, neovim-qt
 Brew install neovim
 Brew install neovim-qt
+
+### neovim-qt
+To disable tabline, try in ginit.vim
+```
+GuiTabline=0
+```
+If not working, set
+```
+[General]
+ext_linegrid=true
+ext_popupmenu=false
+ext_tabline=false
+```
+Check the [link](https://github.com/equalsraf/neovim-qt/issues/589)
+
 
 ## Change fonts:
 Inside neovim
@@ -59,6 +74,16 @@ Install plugins:
 :CocInstall coc-json coc-tsserver
 :CocInstall coc-pyright
 ```
+Manual installation to deal with proxy issue
+1. Install yarn
+2. Download plugin 
+3. replace registry.yarnpkg.com by company url
+4. yarn install --frozen-lockfile
+5. add
+
+coc-pyright:
+in CocConfig, set "python.analysis.typeCheckingMode": "off"
+
 #### fzf
 Requirement: install `the_silver_searcher`
 #### nvim-treesitter-textobjects
