@@ -98,3 +98,11 @@ Also, call
 :TSInstall python
 ```
 to install the package in python
+#### OmniSharp
+Install OmniSharp vim plugin and roslyn server
+Put the following in init.vim
+```
+let g:OmniSharp_selector_ui = 'fzf'
+let g:OmniSharp_selector_findusages = 'fzf'
+let g:OmniSharp_server_path = '/home/cheny/workspace/omnisharp-linux-x64/run
+```
