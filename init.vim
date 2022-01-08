@@ -80,6 +80,7 @@ noremap <D-e> :sp <Bar> term<CR>i
 noremap <D-n> i
 tnoremap <D-n> <C-\><C-N>
 autocmd BufEnter * if &buftype ==# 'terminal' |:startinsert| endif 
+tnoremap <D-F> <C-\><C-N>:lua change_terminal_name('
 
 
 "run a block of code
@@ -94,7 +95,7 @@ autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif
 tmap <D-r> <C-\><C-N>pi 
 tmap <D-'> <C-\><C-N>"+pi
 
-" edittin
+" editting
 nnoremap <Leader>s :.,$s/
 
 "--- plugins ---
@@ -126,7 +127,7 @@ noremap <Leader>dq :<C-U>call fugitive#DiffClose()<CR>
 noremap <Leader>dv :Gvdiffsplit<CR>
 
 lua require('plugins/nvim-treesitter')
-lua require('plugins/lualine')
+"lua require('plugins/lualine')
 
 " coc nvim
 " TextEdit might fail if hidden is not set.
@@ -206,3 +207,17 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
+lua << EOF
+function change_terminal_name(name)
+   vim.api.nvim_command('file '..vim.fn.fnamemodify(vim.fn.bufname('%'), ':p:h').. '/' .. name)
+end
+
+local function get_working_directory()
+  if vim.t.wd == nil then
+    return ''
+  else
+    return vim.fn.fnamemodify(vim.t.wd , ':p:h:t')
+  end
+end
+
+EOF

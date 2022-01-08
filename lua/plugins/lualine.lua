@@ -1,9 +1,9 @@
-local function get_working_directory()
-  if vim.t.wd == nil then
-    return ''
-  else
-    return vim.fn.fnamemodify(vim.t.wd , ':p:h:t')
-  end
+local function get_filename()
+   if vim.opt.buftype:get() == 'terminal' then
+      return vim.fn.fnamemodify(vim.fn.expand('%'), ':p:h:h:h:t') .. ':' .. vim.fn.fnamemodify(vim.fn.expand('%'), ':p:t')
+   else
+      return vim.fn.fnamemodify(vim.fn.expand('%'), ':p:t')
+   end
 end
 require'lualine'.setup {
   options = {
@@ -17,7 +17,7 @@ require'lualine'.setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {{'diagnostics', sources={'nvim_lsp', 'coc'}}},
-    lualine_c = {'filename'},
+    lualine_c = {get_filename},
     lualine_x = {},
     lualine_y = {'progress'},
     lualine_z = {'location'}
@@ -25,7 +25,7 @@ require'lualine'.setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
+    lualine_c = {get_filename},
     lualine_x = {'location'},
     lualine_y = {},
     lualine_z = {}

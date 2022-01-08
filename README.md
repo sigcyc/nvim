@@ -30,6 +30,7 @@ Inside neovim
 ### Mac system override
 
 Install hammerspoon
+
 Overwrite the global shortcuts
 ```
 hs.hotkey.bind("cmd", 'h', function()
@@ -84,6 +85,12 @@ Manual installation to deal with proxy issue
 coc-pyright:
 in CocConfig, set "python.analysis.typeCheckingMode": "off"
 
+coc-snippets:
+It can load UltiSnips format snippets. 
+:CocCommand snippets.editSnippets
+snip formats tutorials can be found [here](https://github.com/SirVer/ultisnips)
+
+
 #### fzf
 Requirement: install `the_silver_searcher`
 #### nvim-treesitter-textobjects
@@ -106,3 +113,5 @@ let g:OmniSharp_selector_ui = 'fzf'
 let g:OmniSharp_selector_findusages = 'fzf'
 let g:OmniSharp_server_path = '/home/cheny/workspace/omnisharp-linux-x64/run
 ```
+#### lualine
+support to better display terminal filename. We display it as last component of the path:bash. We also define a function to change the name to path:name  
