@@ -1,3 +1,11 @@
+# New Mac Environment set up
+1: install homebrew
+2: install vim-plug
+3: git clone my vim files. When doing the git clone, need to use the GitHub token
+Check the [link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+
+
 # Neovim setup
 
 ## install vim
@@ -29,7 +37,11 @@ Inside neovim
 
 ### Mac system override
 
-Install hammerspoon
+Method 1: Put nvim-qt into Application
+System Preference -> Keyboard -> Shortcuts -> App Shortcuts
+Click +, add nvim-qt, and then modify the menu shortcut (Hide nvim-qt)
+
+Method 2: Install hammerspoon
 
 Overwrite the global shortcuts
 ```
