@@ -92,7 +92,7 @@ Manual installation to deal with proxy issue
 2. Download plugin 
 3. replace registry.yarnpkg.com by company url
 4. yarn install --frozen-lockfile
-5. add
+5. add the path to init.vim 
 
 coc-pyright:
 in CocConfig, set "python.analysis.typeCheckingMode": "off"
