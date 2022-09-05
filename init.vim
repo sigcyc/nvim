@@ -14,6 +14,7 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 "Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
@@ -21,8 +22,8 @@ call plug#end()
 
 set rtp+=/Users/yichenchen/workspace/coc-lists
 
-set tabstop=3
-set shiftwidth=3
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set smarttab
 set guifont=Monaco:h16
@@ -103,6 +104,7 @@ noremap <Leader>cw :let t:wd = getcwd()<CR>
 autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif
 tmap <D-r> <C-\><C-N>pi 
 tmap <D-'> <C-\><C-N>"+pi
+nmap <Leader>cp cd:exe "!cp -r" '<C-r>+' getcwd()<CR>
 
 " editting
 nnoremap <Leader>s :.,$s/
@@ -232,9 +234,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
+" CocList
+nmap <D-p> :CocList workspaces<CR>
+
 lua << EOF
 function change_terminal_name(name)
-   vim.api.nvim_command('file '..vim.fn.fnamemodify(vim.fn.bufname('%'), ':p:h').. '/' .. name)
+  vim.api.nvim_command('file '..vim.fn.fnamemodify(vim.fn.bufname('%'), ':p:h').. '/' .. name)
 end
 
 local function get_working_directory()
@@ -244,9 +249,7 @@ local function get_working_directory()
     return vim.fn.fnamemodify(vim.t.wd , ':p:h:t')
   end
 end
-EOF
 
-lua << EOF
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
@@ -264,10 +267,24 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+}
+
 EOF
 
 lua << EOF
-require('telescope').setup{
-  -- ...
-}
+function add_workspace(name)
+  local file = io.open('/Users/yichenchen/workspace/coc-lists/workspaces.json', 'r+') 
+  if file then
+    local contents = file:read("*a")
+    content_json = vim.json.decode(contents)
+    content_json[name] = vim.fn.getcwd()  
+    --print(vim.json.encode(content_json))
+    file:write(vim.json.encode(content_json))
+    io.close(file)
+  end
+end
 EOF

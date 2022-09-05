@@ -4,7 +4,9 @@
 3: git clone my vim files. When doing the git clone, need to use the GitHub token
 Check the [link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
+# GitHub ssh permission
 
+Check the [link](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 # Neovim setup
 
@@ -92,7 +94,7 @@ Manual installation to deal with proxy issue
 2. Download plugin 
 3. replace registry.yarnpkg.com by company url
 4. yarn install --frozen-lockfile
-5. add the path to init.vim 
+5. in init.vim: set rtp+=/Path/To/Plugin/Root
 
 coc-pyright:
 in CocConfig, set "python.analysis.typeCheckingMode": "off"
@@ -101,6 +103,9 @@ coc-snippets:
 It can load UltiSnips format snippets. 
 :CocCommand snippets.editSnippets
 snip formats tutorials can be found [here](https://github.com/SirVer/ultisnips)
+
+coc-lists
+If it is not working in mac, try installing rosetta first. In Application, right click safari-> Get Info -> Open using Rosetta will give you the prompt
 
 
 #### fzf
