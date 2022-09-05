@@ -12,17 +12,25 @@ Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+"Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 call plug#end()
+
+set rtp+=/Users/yichenchen/workspace/coc-lists
 
 set tabstop=3
 set shiftwidth=3
 set expandtab
 set smarttab
-set guifont=Monaco:h14
+set guifont=Monaco:h16
 set splitbelow
 set ignorecase
 set number relativenumber
 let mapleader=","
+
 
 "--- shortcuts ---
 " movement
@@ -80,6 +88,7 @@ noremap <D-e> :sp <Bar> term<CR>i
 noremap <D-n> i
 tnoremap <D-n> <C-\><C-N>
 autocmd BufEnter * if &buftype ==# 'terminal' |:startinsert| endif 
+tnoremap <D-e> <C-\><C-N>:sp <Bar> term<CR>i
 tnoremap <D-F> <C-\><C-N>:lua change_terminal_name('
 
 
@@ -105,8 +114,17 @@ noremap <Leader>w :HopWordAC<CR>
 noremap <Leader>b :HopWordBC<CR>
 " nerdtree
 noremap <Leader>n :NERDTreeToggle<CR>
+noremap <Leader>gn :NERDTree<CR>
 " tagbar
-noremap <D-g> :Tagbar<CR>
+nnoremap <silent><nowait> <D-g>  :call ToggleOutline()<CR>
+function! ToggleOutline() abort
+ let winid = coc#window#find('cocViewId', 'OUTLINE')
+ if winid == -1
+   call CocActionAsync('showOutline', 1)
+ else
+   call coc#window#close(winid)
+ endif
+endfunction
 " fzf
 noremap <D-s> :Ag<CR>
 noremap <D-S> :FZF<CR>
@@ -123,6 +141,7 @@ tnoremap <D-B> <C-\><C-N>:Lines<CR>
 tnoremap <D-a> <C-\><C-N>:Tags<CR>
 "fugitive
 noremap <Leader>gs :Git<CR>
+noremap <Leader>gp :Git push origin<CR>
 noremap <Leader>dq :<C-U>call fugitive#DiffClose()<CR>
 noremap <Leader>dv :Gvdiffsplit<CR>
 
@@ -160,12 +179,18 @@ endif
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -219,5 +244,30 @@ local function get_working_directory()
     return vim.fn.fnamemodify(vim.t.wd , ':p:h:t')
   end
 end
+EOF
 
+lua << EOF
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+EOF
+
+lua << EOF
+require('telescope').setup{
+  -- ...
+}
 EOF
