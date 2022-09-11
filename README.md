@@ -30,9 +30,24 @@ ext_tabline=false
 Check the [link](https://github.com/equalsraf/neovim-qt/issues/589)
 
 
-## Change fonts:
+## Change fonts
+
 Inside neovim
-	set guifont=* # list all guifont
+```
+set guifont=* # list all guifont
+```
+
+Some of the plugins will need [nerd fonts](https://github.com/ryanoasis/nerd-fonts).
+To install a patched font, follow the Option 3 and Option 5. An example to install Meslo font:
+```git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
+cd nerd-fonts
+git sparse-checkout add patched-fonts/Meslo
+./install.sh Meslo
+```
+
+We can also [preview the fonts](https://www.nerdfonts.com/)
+
+
 
 ## Shortcuts
 

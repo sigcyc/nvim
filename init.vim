@@ -26,7 +26,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set smarttab
-set guifont=Monaco:h16
+set guifont=MesloLGS\ Nerd\ Font:h16
 set splitbelow
 set ignorecase
 set number relativenumber
