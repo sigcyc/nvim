@@ -115,7 +115,7 @@ lua require('plugins/hop')
 noremap <Leader>w :HopWordAC<CR>
 noremap <Leader>b :HopWordBC<CR>
 " nerdtree
-noremap <Leader>n :NERDTreeToggle<CR>
+noremap <Leader>n :NvimTreeToggle<CR>
 noremap <Leader>gn :NERDTree<CR>
 " tagbar
 nnoremap <silent><nowait> <D-g>  :call ToggleOutline()<CR>
@@ -235,7 +235,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " CocList
-nmap <D-p> :CocList workspaces<CR>
+nmap <D-m> :CocList workspaces<CR>
+nmap <D-M> :lua add_workspace('
 
 lua << EOF
 function change_terminal_name(name)
@@ -250,6 +251,9 @@ local function get_working_directory()
   end
 end
 
+-- nvim-tree.lua setup
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   view = {
@@ -257,8 +261,15 @@ require("nvim-tree").setup({
     mappings = {
       list = {
         { key = "u", action = "dir_up" },
+        { key = "I", action = "toggle_dotfiles"},
+        { key = "H", action = "toggle_git_ignored"},
       },
     },
+  },
+  actions = {
+    change_dir = {
+      global = true
+    } 
   },
   renderer = {
     group_empty = true,
@@ -277,13 +288,26 @@ EOF
 
 lua << EOF
 function add_workspace(name)
-  local file = io.open('/Users/yichenchen/workspace/coc-lists/workspaces.json', 'r+') 
+  local workspace_filename = '/Users/yichenchen/workspace/coc-lists/workspaces.json'
+  local file = io.open(workspace_filename, 'r')
   if file then
     local contents = file:read("*a")
     content_json = vim.json.decode(contents)
     content_json[name] = vim.fn.getcwd()  
-    --print(vim.json.encode(content_json))
-    file:write(vim.json.encode(content_json))
+    io.close(file)
+    local tkeys = {}
+    for k in pairs(content_json) do table.insert(tkeys, k) end
+    table.sort(tkeys)
+    local file = io.open(workspace_filename, 'w')
+    file:write('{\n')
+    for idx, k in ipairs(tkeys) do
+      if (idx ~= table.getn(tkeys)) then
+        file:write("\"", k, "\": \"", content_json[k], "\", \n")
+      else
+        file:write("\"", k, "\": \"", content_json[k], "\"\n")
+      end
+    end
+    file:write('}')
     io.close(file)
   end
 end
