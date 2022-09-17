@@ -99,9 +99,20 @@ nmap <D-r> yap<C-w>jpi<CR><D-k>}j
 nmap <D-u> mz"+yaf<C-w>ji%paste<CR><D-k>'z
 nmap <D-c> mz"+yac<C-w>ji%paste<CR><D-k>'z
 
+lua << EOF
+function tab_enter()
+  local view = require "nvim-tree.view"
+  local lib = require "nvim-tree.lib"
+  if view.is_visible() then
+    view.close()
+    lib.open(vim.fn.getcwd())
+  end
+end
+EOF
 " clipboard path
 noremap <Leader>cw :let t:wd = getcwd()<CR>
-autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif
+autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif | lua tab_enter()
+
 tmap <D-r> <C-\><C-N>pi 
 tmap <D-'> <C-\><C-N>"+pi
 nmap <Leader>cp cd:exe "!cp -r" '<C-r>+' getcwd()<CR>
@@ -278,15 +289,14 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+
+-- indent_blankline setup
 require("indent_blankline").setup {
     -- for example, context is off by default, use this to turn it on
     show_current_context = true,
     show_current_context_start = true,
 }
 
-EOF
-
-lua << EOF
 function add_workspace(name)
   local workspace_filename = '/Users/yichenchen/workspace/coc-lists/workspaces.json'
   local file = io.open(workspace_filename, 'r')

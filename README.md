@@ -147,3 +147,6 @@ let g:OmniSharp_server_path = '/home/cheny/workspace/omnisharp-linux-x64/run
 ```
 #### lualine
 support to better display terminal filename. We display it as last component of the path:bash. We also define a function to change the name to path:name  
+
+### nvim-tree.lua
+
