@@ -104,8 +104,13 @@ function tab_enter()
   local view = require "nvim-tree.view"
   local lib = require "nvim-tree.lib"
   if view.is_visible() then
+    local cur_win = vim.api.nvim_get_current_win()
+    local tree_win = view.get_winnr()
     view.close()
     lib.open(vim.fn.getcwd())
+    if cur_win ~= tree_win then
+      vim.api.nvim_set_current_win(cur_win)
+    end
   end
 end
 EOF
