@@ -129,7 +129,9 @@ nnoremap <Leader>s :.,$s/
 " hop
 lua require('plugins/hop')
 noremap <Leader>w :HopWordAC<CR>
+noremap <leader>W :HopLineAC<CR>
 noremap <Leader>b :HopWordBC<CR>
+noremap <leader>B :HopLineBC<CR>
 " nerdtree
 noremap <Leader>n :execute "NvimTreeToggle" getcwd()<CR>
 noremap <Leader>gn :NERDTree<CR>
