@@ -131,7 +131,7 @@ lua require('plugins/hop')
 noremap <Leader>w :HopWordAC<CR>
 noremap <Leader>b :HopWordBC<CR>
 " nerdtree
-noremap <Leader>n :NvimTreeToggle<CR>
+noremap <Leader>n :execute "NvimTreeToggle" getcwd()<CR>
 noremap <Leader>gn :NERDTree<CR>
 " tagbar
 nnoremap <silent><nowait> <D-g>  :call ToggleOutline()<CR>
@@ -277,6 +277,8 @@ require("nvim-tree").setup({
     mappings = {
       list = {
         { key = "u", action = "dir_up" },
+        { key = "s", action = "vsplit" },
+        { key = "C-x", action= "system_open" },
         { key = "I", action = "toggle_dotfiles"},
         { key = "H", action = "toggle_git_ignored"},
       },
@@ -284,6 +286,7 @@ require("nvim-tree").setup({
   },
   actions = {
     change_dir = {
+      enable = false,
       global = true
     } 
   },
