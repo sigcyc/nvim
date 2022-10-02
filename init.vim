@@ -17,6 +17,8 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v2.x' }
 "Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 call plug#end()
 
@@ -99,24 +101,9 @@ nmap <D-r> yap<C-w>jpi<CR><D-k>}j
 nmap <D-u> mz"+yaf<C-w>ji%paste<CR><D-k>'z
 nmap <D-c> mz"+yac<C-w>ji%paste<CR><D-k>'z
 
-lua << EOF
-function tab_enter()
-  local view = require "nvim-tree.view"
-  local lib = require "nvim-tree.lib"
-  if view.is_visible() then
-    local cur_win = vim.api.nvim_get_current_win()
-    local tree_win = view.get_winnr()
-    view.close()
-    lib.open(vim.fn.getcwd())
-    if cur_win ~= tree_win then
-      vim.api.nvim_set_current_win(cur_win)
-    end
-  end
-end
-EOF
 " clipboard path
 noremap <Leader>cw :let t:wd = getcwd()<CR>
-autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif | lua tab_enter()
+autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif
 
 tmap <D-r> <C-\><C-N>pi 
 tmap <D-'> <C-\><C-N>"+pi
@@ -133,7 +120,7 @@ noremap <leader>W :HopLineAC<CR>
 noremap <Leader>b :HopWordBC<CR>
 noremap <leader>B :HopLineBC<CR>
 " nerdtree
-noremap <Leader>n :execute "NvimTreeToggle" getcwd()<CR>
+noremap <Leader>n :Neotree toggle<CR>
 noremap <Leader>gn :NERDTree<CR>
 " tagbar
 nnoremap <silent><nowait> <D-g>  :call ToggleOutline()<CR>
@@ -269,6 +256,7 @@ local function get_working_directory()
   end
 end
 
+require('plenary.reload').reload_module('neo-tree', true)
 -- nvim-tree.lua setup
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
@@ -280,6 +268,7 @@ require("nvim-tree").setup({
       list = {
         { key = "u", action = "dir_up" },
         { key = "s", action = "vsplit" },
+        { key = "cd", action = "cd"},
         { key = "C-x", action= "system_open" },
         { key = "I", action = "toggle_dotfiles"},
         { key = "H", action = "toggle_git_ignored"},
@@ -299,6 +288,21 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+-- neo-tree setup
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+require("neo-tree").setup{
+  filesystem = {
+    window = {
+      mappings = {
+        ["r"] = "refresh",
+        ["R"] = "rename",
+        ["o"] = "open",
+        ["i"] = "toggle_hidden",
+        ["u"] = "navigate_up"
+      }
+    }
+  }
+}
 
 -- indent_blankline setup
 require("indent_blankline").setup {
