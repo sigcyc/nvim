@@ -138,7 +138,6 @@ noremap <D-s> :Telescope grep_string<CR>
 noremap <D-S> :Telescope find_files<CR>
 noremap <D-o> :Telescope buffers<CR>
 noremap <D-b> :Telescope current_buffer_fuzzy_find<CR>
-noremap <D-B> :Lines<CR>
 noremap <D-a> :Telescope tags<CR>
 noremap <Leader>gh :Telescope git_bcommits<CR>
 noremap <Leader>gc :Telescope git_commits<CR>
