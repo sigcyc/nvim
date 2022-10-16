@@ -12,8 +12,8 @@ Check the [link](https://docs.github.com/en/authentication/connecting-to-github-
 
 ## install vim
 First step: install neovim, neovim-qt
-Brew install neovim
-Brew install neovim-qt
+brew install neovim
+brew install neovim-qt
 
 ### neovim-qt
 To disable tabline, try in ginit.vim
@@ -148,8 +148,10 @@ let g:OmniSharp_server_path = '/home/cheny/workspace/omnisharp-linux-x64/run
 #### lualine
 support to better display terminal filename. We display it as last component of the path:bash. We also define a function to change the name to path:name  
 
-### nvim-tree.lua
+### neo-tree.lua
 Fork my version of nvim-tree. To add doc, please run
 ```
 :helptags doc
 ```
+### telescope
+

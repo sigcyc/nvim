@@ -16,15 +16,16 @@ Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'MunifTanjim/nui.nvim'
-Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v2.x' }
-"Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'sigcyc/neo-tree.nvim', { 'branch': 'v2.x' }
 call plug#end()
 
 set rtp+=/Users/yichenchen/workspace/coc-lists
 
 set tabstop=2
+set winbar=%f
 set shiftwidth=2
 set expandtab
 set smarttab
@@ -132,21 +133,24 @@ function! ToggleOutline() abort
    call coc#window#close(winid)
  endif
 endfunction
-" fzf
-noremap <D-s> :Ag<CR>
-noremap <D-S> :FZF<CR>
-noremap <D-o> :Buffers<CR>
-noremap <D-b> :BLines<CR>
+" telescope
+noremap <D-s> :Telescope grep_string<CR>
+noremap <D-S> :Telescope find_files<CR>
+noremap <D-o> :Telescope buffers<CR>
+noremap <D-b> :Telescope current_buffer_fuzzy_find<CR>
 noremap <D-B> :Lines<CR>
-noremap <D-a> :Tags<CR>
+noremap <D-a> :Telescope tags<CR>
+noremap <Leader>gh :Telescope git_bcommits<CR>
+noremap <Leader>gc :Telescope git_commits<CR>
+noremap <Leader>gf :Telescope git_files<CR>
 
 tnoremap <D-s> <C-\><C-N>:Ag<CR>
-tnoremap <D-S> <C-\><C-N>:FZF<CR>
+tnoremap <D-S> <C-\><C-N>:Telescope find_files<CR>
 tnoremap <D-o> <C-\><C-N>:Buffers<CR>
 tnoremap <D-b> <C-\><C-N>:BLines<CR>
 tnoremap <D-B> <C-\><C-N>:Lines<CR>
 tnoremap <D-a> <C-\><C-N>:Tags<CR>
-"fugitive
+"git
 noremap <Leader>gs :Git<CR>
 noremap <Leader>gp :Git push origin<CR>
 noremap <Leader>dq :<C-U>call fugitive#DiffClose()<CR>
@@ -311,6 +315,7 @@ require("indent_blankline").setup {
     show_current_context_start = true,
 }
 
+
 function add_workspace(name)
   local workspace_filename = '/Users/yichenchen/workspace/coc-lists/workspaces.json'
   local file = io.open(workspace_filename, 'r')
@@ -335,4 +340,22 @@ function add_workspace(name)
     io.close(file)
   end
 end
+
+require("telescope").setup {
+  defaults = {
+    -- Default configuration for telescope goes here:
+    -- config_key = value,
+    mappings = {
+      i = {
+        -- map actions.which_key to <C-h> (default: <C-/>)
+        -- actions.which_key shows the mappings for your picker,
+        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+        ["<esc>"] = require('telescope.actions').close,
+        ["<D-j>"] = require('telescope.actions').move_selection_next,
+        ["<D-k>"] = require('telescope.actions').move_selection_previous,
+      }
+    }
+  }
+}
+require("telescope").load_extension("fzf")
 EOF
