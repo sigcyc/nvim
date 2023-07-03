@@ -123,6 +123,10 @@ tnoremap <D-B> <C-\><C-N>:Lines<CR>
 tnoremap <D-a> <C-\><C-N>:Tags<CR>
 "fugitive
 noremap <Leader>gs :Git<CR>
+nnoremap <Leader>gd :Gvdiffsplit @~1:%
+nnoremap <Leader>gp :Git push origin<CR>
+nnoremap <Leader>gl :Git pull<CR>
+nnoremap <Leader>gg :Git log --all --decorate --oneline --graph<CR>
 noremap <Leader>dq :<C-U>call fugitive#DiffClose()<CR>
 noremap <Leader>dv :Gvdiffsplit<CR>
 
