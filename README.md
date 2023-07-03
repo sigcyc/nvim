@@ -1,9 +1,19 @@
+# New Mac Environment set up
+1: install homebrew
+2: install vim-plug
+3: git clone my vim files. When doing the git clone, need to use the GitHub token
+Check the [link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+# GitHub ssh permission
+
+Check the [link](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
 # Neovim setup
 
 ## install vim
 First step: install neovim, neovim-qt
-Brew install neovim
-Brew install neovim-qt
+brew install neovim
+brew install neovim-qt
 
 ### neovim-qt
 To disable tabline, try in ginit.vim
@@ -20,16 +30,35 @@ ext_tabline=false
 Check the [link](https://github.com/equalsraf/neovim-qt/issues/589)
 
 
-## Change fonts:
+## Change fonts
+
 Inside neovim
-	set guifont=* # list all guifont
+```
+set guifont=* # list all guifont
+```
+
+Some of the plugins will need [nerd fonts](https://github.com/ryanoasis/nerd-fonts).
+To install a patched font, follow the Option 3 and Option 5. An example to install Meslo font:
+```git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
+cd nerd-fonts
+git sparse-checkout add patched-fonts/Meslo
+./install.sh Meslo
+```
+
+We can also [preview the fonts](https://www.nerdfonts.com/)
+
+
 
 ## Shortcuts
 
 
 ### Mac system override
 
-Install hammerspoon
+Method 1: Put nvim-qt into Application
+System Preference -> Keyboard -> Shortcuts -> App Shortcuts
+Click +, add nvim-qt, and then modify the menu shortcut (Hide nvim-qt)
+
+Method 2: Install hammerspoon
 
 Overwrite the global shortcuts
 ```
@@ -80,7 +109,7 @@ Manual installation to deal with proxy issue
 2. Download plugin 
 3. replace registry.yarnpkg.com by company url
 4. yarn install --frozen-lockfile
-5. add
+5. in init.vim: set rtp+=/Path/To/Plugin/Root
 
 coc-pyright:
 in CocConfig, set "python.analysis.typeCheckingMode": "off"
@@ -89,6 +118,9 @@ coc-snippets:
 It can load UltiSnips format snippets. 
 :CocCommand snippets.editSnippets
 snip formats tutorials can be found [here](https://github.com/SirVer/ultisnips)
+
+coc-lists
+If it is not working in mac, try installing rosetta first. In Application, right click safari-> Get Info -> Open using Rosetta will give you the prompt
 
 
 #### fzf
@@ -115,3 +147,11 @@ let g:OmniSharp_server_path = '/home/cheny/workspace/omnisharp-linux-x64/run
 ```
 #### lualine
 support to better display terminal filename. We display it as last component of the path:bash. We also define a function to change the name to path:name  
+
+### neo-tree.lua
+Fork my version of nvim-tree. To add doc, please run
+```
+:helptags doc
+```
+### telescope
+

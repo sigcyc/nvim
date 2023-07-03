@@ -1,3 +1,7 @@
 {
-	"suggest.autoTrigger": "always"
+	"suggest.autoTrigger": "always",
+   "list.insertMappings": {
+      "<C-k>": "action:newfile"
+   }
 }
+
