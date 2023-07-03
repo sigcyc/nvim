@@ -2,7 +2,6 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'morhetz/gruvbox'
 "" neovim plugin 
 Plug 'phaazon/hop.nvim'
-Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -12,6 +11,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
 call plug#end()
 
 set tabstop=3
@@ -104,7 +104,7 @@ lua require('plugins/hop')
 noremap <Leader>w :HopWordAC<CR>
 noremap <Leader>b :HopWordBC<CR>
 " nerdtree
-noremap <Leader>n :NERDTreeToggle<CR>
+noremap <Leader>n :Neotree toggle<CR>
 " tagbar
 noremap <D-g> :Tagbar<CR>
 " fzf
