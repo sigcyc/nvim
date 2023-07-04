@@ -38,7 +38,7 @@ set guifont=* # list all guifont
 ```
 
 Some of the plugins will need [nerd fonts](https://github.com/ryanoasis/nerd-fonts).
-To install a patched font, follow the Option 3 and Option 5. An example to install Meslo font:
+To install a patched font, follow the Option 3 and Option 5. An example to install Meslo font in option 5:
 ```git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
 cd nerd-fonts
 git sparse-checkout add patched-fonts/Meslo
@@ -68,6 +68,8 @@ hs.hotkey.bind("cmd", 'h', function()
         hs.eventtap.keyStroke({}, "h", 0)
 end)
 ```
+### Mac system mapping
+To map command + shift + j, we need to write <S-D-J> in the mac system
 ### linux system clipboard
 neovim doesn't provide clipboard support. need to install xclip locally
 See the [issue](https://discourse.nixos.org/t/how-to-support-clipboard-for-neovim/9534) and the [installation](https://discourse.nixos.org/t/how-to-support-clipboard-for-neovim/9534)
@@ -125,6 +127,8 @@ If it is not working in mac, try installing rosetta first. In Application, right
 
 #### fzf
 Requirement: install `the_silver_searcher`
+To install telescope-fzf-native, make sure to install CMake, make, gcc or Clang as [here](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+
 #### nvim-treesitter-textobjects
 Usage: for getting python functions / classes
 Installation:
