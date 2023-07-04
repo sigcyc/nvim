@@ -157,7 +157,7 @@ noremap <Leader>dq :<C-U>call fugitive#DiffClose()<CR>
 noremap <Leader>dv :Gvdiffsplit<CR>
 
 lua require('plugins/nvim-treesitter')
-"lua require('plugins/lualine')
+lua require('plugins/lualine')
 
 " coc nvim
 " TextEdit might fail if hidden is not set.
