@@ -19,6 +19,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 call plug#end()
 
 set rtp+=/Users/yichenchen/workspace/coc-lists
@@ -28,7 +29,7 @@ set winbar=%f
 set shiftwidth=2
 set expandtab
 set smarttab
-set guifont=MesloLGS\ Nerd\ Font:h16
+set guifont=BitstreamVeraSansMono\ Nerd\ Font:h14
 set splitbelow
 set ignorecase
 set number relativenumber

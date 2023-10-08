@@ -38,8 +38,9 @@ set guifont=* # list all guifont
 ```
 
 Some of the plugins will need [nerd fonts](https://github.com/ryanoasis/nerd-fonts).
-To install a patched font, follow the Option 3 and Option 5. An example to install Meslo font in option 5:
+To install a patched font, follow the Option 3 and Option 5. Make sure git version is high enough. An example to install Meslo font in option 5:
 ```git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
+git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
 cd nerd-fonts
 git sparse-checkout add patched-fonts/Meslo
 ./install.sh Meslo
@@ -159,3 +160,5 @@ Fork my version of nvim-tree. To add doc, please run
 ```
 ### telescope
 
+### markdown-preview
+Install nodejs and yarn
