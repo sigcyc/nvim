@@ -162,3 +162,6 @@ Fork my version of nvim-tree. To add doc, please run
 
 ### markdown-preview
 Install nodejs and yarn
+Note that markdown-preview needs a web-browser to open.
+
+
