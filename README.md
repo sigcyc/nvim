@@ -12,7 +12,9 @@ Check the [link](https://docs.github.com/en/authentication/connecting-to-github-
 
 ## install vim
 First step: install neovim, neovim-qt
+
 brew install neovim
+
 brew install neovim-qt
 
 ### neovim-qt
@@ -28,6 +30,13 @@ ext_popupmenu=false
 ext_tabline=false
 ```
 Check the [link](https://github.com/equalsraf/neovim-qt/issues/589)
+
+#### neovim-qt on sig machine
+To maximize the chance to successfully install neovim-qt, follow the following steps.
+
+1. git clone the neovim-qt source code 5668445 (v0.2.16.1). I tried to download the code directly from the website, but am having issue with the msgpack
+2. install a fresh environment with qt-5.12. The version v0.2.16.1 seems to require qt-5.12 and does not work with qt-5.15. Installing qt-5.12 leads to uncompatible packages. I've also spend sometime trying to add c++ support to the building process which doesn't work
+3. when activate the environment, make sure to start from an empty environment - not acitivating from a existing environment
 
 
 ## Change fonts
