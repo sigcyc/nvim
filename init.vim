@@ -2,7 +2,6 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'morhetz/gruvbox'
 "" neovim plugin 
 Plug 'phaazon/hop.nvim'
-Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -19,7 +18,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'MunifTanjim/nui.nvim'
-Plug 'sigcyc/neo-tree.nvim', { 'branch': 'v2.x' }
+Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 call plug#end()
 
@@ -30,11 +29,15 @@ set winbar=%f
 set shiftwidth=2
 set expandtab
 set smarttab
-set guifont=MesloLGS\ Nerd\ Font:h16
+set guifont=BitstreamVeraSansMono\ Nerd\ Font:h14
 set splitbelow
 set ignorecase
 set number relativenumber
+set clipboard+=unnamedplus
 let mapleader=","
+
+
+
 
 
 "--- shortcuts ---
@@ -58,10 +61,10 @@ noremap <D-v> :vsplit<CR>
 noremap <D-i> :split<CR>
 noremap <D-t> :tabnew<CR>
 noremap <D-x> <C-w>x
-noremap <D-H> <C-w>H
-noremap <D-J> <C-w>J
-noremap <D-K> <C-w>K
-noremap <D-L> <C-w>L
+noremap <S-D-H> <C-w>H
+noremap <S-D-J> <C-w>J
+noremap <S-D-K> <C-w>K
+noremap <S-D-L> <C-w>L
 noremap <D--> <C-w>_
 noremap <D-=> <C-w>=
 noremap <D-\> <C-w><Bar>
@@ -76,10 +79,10 @@ tnoremap <D-v> <C-\><C-N>:vsplit<CR>i
 tnoremap <D-i> <C-\><C-N>:split<CR>i
 tnoremap <D-t> <C-\><C-N>:tabnew<CR>i
 tnoremap <D-x> <C-\><C-N><C-w>xi
-tnoremap <D-H> <C-\><C-N><C-w>Hi
-tnoremap <D-J> <C-\><C-N><C-w>Ji
-tnoremap <D-K> <C-\><C-N><C-w>Ki
-tnoremap <D-L> <C-\><C-N><C-w>Li
+tnoremap <S-D-H> <C-\><C-N><C-w>Hi
+tnoremap <S-D-J> <C-\><C-N><C-w>Ji
+tnoremap <S-D-K> <C-\><C-N><C-w>Ki
+tnoremap <S-D-L> <C-\><C-N><C-w>Li
 tnoremap <D--> <C-\><C-N><C-w>_i
 tnoremap <D-=> <C-\><C-N><C-w>=i
 tnoremap <D-\> <C-\><C-N><C-w><Bar>i
@@ -123,7 +126,6 @@ noremap <Leader>b :HopWordBC<CR>
 noremap <leader>B :HopLineBC<CR>
 " nerdtree
 noremap <Leader>n :Neotree toggle<CR>
-noremap <Leader>gn :NERDTree<CR>
 " tagbar
 nnoremap <silent><nowait> <D-g>  :call ToggleOutline()<CR>
 function! ToggleOutline() abort
@@ -152,12 +154,15 @@ tnoremap <D-B> <C-\><C-N>:Lines<CR>
 tnoremap <D-a> <C-\><C-N>:Tags<CR>
 "git
 noremap <Leader>gs :Git<CR>
-noremap <Leader>gp :Git push origin<CR>
+nnoremap <Leader>gd :Gvdiffsplit @~1:%
+nnoremap <Leader>gp :Git push origin<CR>
+nnoremap <Leader>gl :Git pull<CR>
+nnoremap <Leader>gg :Git log --all --decorate --oneline --graph<CR>
 noremap <Leader>dq :<C-U>call fugitive#DiffClose()<CR>
 noremap <Leader>dv :Gvdiffsplit<CR>
 
 lua require('plugins/nvim-treesitter')
-"lua require('plugins/lualine')
+lua require('plugins/lualine')
 
 " coc nvim
 " TextEdit might fail if hidden is not set.
@@ -309,10 +314,12 @@ require("neo-tree").setup{
 }
 
 -- indent_blankline setup
-require("indent_blankline").setup {
+require("ibl").setup {
     -- for example, context is off by default, use this to turn it on
-    show_current_context = true,
-    show_current_context_start = true,
+    scope = {
+      show_start = false,
+      show_end = false,
+    }
 }
 
 

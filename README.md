@@ -51,7 +51,7 @@ To install a patched font, follow the Option 3 and Option 5. Make sure git versi
 ```git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
 git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
 cd nerd-fonts
-git sparse-checkout add patched-fonts/Meslo
+git sparse-checkout add patched-fonts/BitstreamVeraSansMono
 ./install.sh Meslo
 ```
 
@@ -174,3 +174,6 @@ Install nodejs and yarn
 Note that markdown-preview needs a web-browser to open.
 
 
+## Upgrade neovim
+To upgrade neovim on mac, run
+`brew upgrade nvim`
