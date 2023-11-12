@@ -269,34 +269,6 @@ require('plenary.reload').reload_module('neo-tree', true)
 -- nvim-tree.lua setup
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-        { key = "s", action = "vsplit" },
-        { key = "cd", action = "cd"},
-        { key = "C-x", action= "system_open" },
-        { key = "I", action = "toggle_dotfiles"},
-        { key = "H", action = "toggle_git_ignored"},
-      },
-    },
-  },
-  actions = {
-    change_dir = {
-      enable = false,
-      global = true
-    } 
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
 -- neo-tree setup
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 require("neo-tree").setup{
