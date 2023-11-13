@@ -52,7 +52,7 @@ To install a patched font, follow the Option 3 and Option 5. Make sure git versi
 git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
 cd nerd-fonts
 git sparse-checkout add patched-fonts/BitstreamVeraSansMono
-./install.sh Meslo
+./install.sh BitstreamVeraSansMono
 ```
 
 We can also [preview the fonts](https://www.nerdfonts.com/)

@@ -1,6 +1,5 @@
 call plug#begin(stdpath('data') . '/plugged')
-Plug 'morhetz/gruvbox'
-"" neovim plugin 
+Plug 'morhetz/gruvbox' "" neovim plugin 
 Plug 'phaazon/hop.nvim'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/tagbar'
