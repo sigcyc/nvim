@@ -14,11 +14,12 @@ Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'github/copilot.vim'
 call plug#end()
 
 set rtp+=/Users/yichenchen/workspace/coc-lists
@@ -61,9 +62,9 @@ noremap <D-i> :split<CR>
 noremap <D-t> :tabnew<CR>
 noremap <D-x> <C-w>x
 noremap <S-D-H> <C-w>H
-noremap <S-D-J> <C-w>J
-noremap <S-D-K> <C-w>K
-noremap <S-D-L> <C-w>L
+noremap <D-J> <C-w>J
+noremap <D-K> <C-w>K
+noremap <D-L> <C-w>L
 noremap <D--> <C-w>_
 noremap <D-=> <C-w>=
 noremap <D-\> <C-w><Bar>
@@ -78,10 +79,10 @@ tnoremap <D-v> <C-\><C-N>:vsplit<CR>i
 tnoremap <D-i> <C-\><C-N>:split<CR>i
 tnoremap <D-t> <C-\><C-N>:tabnew<CR>i
 tnoremap <D-x> <C-\><C-N><C-w>xi
-tnoremap <S-D-H> <C-\><C-N><C-w>Hi
-tnoremap <S-D-J> <C-\><C-N><C-w>Ji
-tnoremap <S-D-K> <C-\><C-N><C-w>Ki
-tnoremap <S-D-L> <C-\><C-N><C-w>Li
+tnoremap <D-H> <C-\><C-N><C-w>Hi
+tnoremap <D-J> <C-\><C-N><C-w>Ji
+tnoremap <D-K> <C-\><C-N><C-w>Ki
+tnoremap <D-L> <C-\><C-N><C-w>Li
 tnoremap <D--> <C-\><C-N><C-w>_i
 tnoremap <D-=> <C-\><C-N><C-w>=i
 tnoremap <D-\> <C-\><C-N><C-w><Bar>i
@@ -100,7 +101,7 @@ tnoremap <D-F> <C-\><C-N>:lua change_terminal_name('
 
 
 "run a block of code
-nmap <D-r> yap<C-w>jpi<CR><D-k>}j
+nmap <D-r> yap<C-w>j<C-\><C-N>pi<CR><D-k>}j
 "run class and function. need ac af for function setup
 nmap <D-u> mz"+yaf<C-w>ji%paste<CR><D-k>'z
 nmap <D-c> mz"+yac<C-w>ji%paste<CR><D-k>'z
