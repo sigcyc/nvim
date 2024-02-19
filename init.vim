@@ -103,8 +103,8 @@ tnoremap <D-F> <C-\><C-N>:lua change_terminal_name('
 "run a block of code
 nmap <D-r> yap<C-w>j<C-\><C-N>pi<CR><D-k>}j
 "run class and function. need ac af for function setup
-nmap <D-u> mz"+yaf<C-w>ji%paste<CR><D-k>'z
-nmap <D-c> mz"+yac<C-w>ji%paste<CR><D-k>'z
+nmap <D-u> mz"+yaf<C-w>j%paste<CR><D-k>'z
+nmap <D-c> mz"+yac<C-w>j%paste<CR><D-k>'z
 
 " clipboard path
 noremap <Leader>cw :let t:wd = getcwd()<CR>
@@ -116,6 +116,7 @@ nmap <Leader>cp cd:exe "!cp -r" '<C-r>+' getcwd()<CR>
 
 " editting
 nnoremap <Leader>s :.,$s/
+noremap <Leader>db oimport pdb; pdb.set_trace()<ESC>
 
 "--- plugins ---
 " hop

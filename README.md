@@ -119,8 +119,8 @@ Install plugins:
 Manual installation to deal with proxy issue
 1. Install yarn
 2. Download plugin 
-3. replace registry.yarnpkg.com by company url
-4. yarn install --frozen-lockfile
+3. replace package-lock.json by company url
+4. npm install
 5. in init.vim: set rtp+=/Path/To/Plugin/Root
 
 coc-pyright:
