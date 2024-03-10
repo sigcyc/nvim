@@ -22,7 +22,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'github/copilot.vim'
 call plug#end()
 
-set rtp+=/Users/yichenchen/workspace/coc-lists
+lua << EOF
+vim.opt.rtp:append(vim.env.HOME .. '/workspace/coc-lists')
+EOF
+
 
 set tabstop=2
 set winbar=%f
@@ -250,8 +253,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " CocList
-nmap <D-m> :CocList workspaces<CR>
-nmap <D-M> :lua add_workspace('
+nmap <space>m :CocList workspaces<CR>
+nmap <space>M :lua add_workspace('
 
 lua << EOF
 function change_terminal_name(name)
@@ -297,7 +300,7 @@ require("ibl").setup {
 
 
 function add_workspace(name)
-  local workspace_filename = '/Users/yichenchen/workspace/coc-lists/workspaces.json'
+  local workspace_filename = vim.env.HOME .. '/workspace/coc-lists/workspaces.json'
   local file = io.open(workspace_filename, 'r')
   if file then
     local contents = file:read("*a")
