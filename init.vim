@@ -20,6 +20,11 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'github/copilot.vim'
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
+Plug 'jbyuki/one-small-step-for-vimkind'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'rcarriga/nvim-dap-ui'
 call plug#end()
 
 lua << EOF
@@ -341,4 +346,19 @@ require("telescope").setup {
   }
 }
 require("telescope").load_extension("fzf")
+local dap = require"dap"
+dap.configurations.lua = { 
+  { 
+    type = 'nlua', 
+    request = 'attach',
+    name = "Attach to running Neovim instance",
+  }
+}
+dap.adapters.nlua = function(callback, config)
+  callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
+end
+
+require('dap-python').setup('~/micromamba/envs/local_env1/bin/python')
+require('dapui').setup()
+
 EOF
