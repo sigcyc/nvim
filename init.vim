@@ -21,9 +21,17 @@ Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'github/copilot.vim'
 Plug 'kylechui/nvim-surround'
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
+Plug 'jbyuki/one-small-step-for-vimkind'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'rcarriga/nvim-dap-ui'
 call plug#end()
 
-set rtp+=/Users/yichenchen/workspace/coc-lists
+lua << EOF
+vim.opt.rtp:append(vim.env.HOME .. '/workspace/coc-lists')
+EOF
+
 
 set tabstop=2
 set winbar=%f
@@ -102,7 +110,6 @@ tnoremap <D-F> <C-\><C-N>:lua change_terminal_name('
 
 
 "run a block of code
-"nmap <D-r> yap<C-w>j<C-\><C-N>pi<CR><D-k>}j
 nmap <D-r> :lua execute_in_terminal()<CR>
 "run class and function. need ac af for function setup
 nmap <D-u> mz"+yaf<C-w>j%paste<CR><D-k>'z
@@ -301,7 +308,7 @@ require("ibl").setup {
 
 
 function add_workspace(name)
-  local workspace_filename = '/Users/yichenchen/workspace/coc-lists/workspaces.json'
+  local workspace_filename = vim.env.HOME .. '/workspace/coc-lists/workspaces.json'
   local file = io.open(workspace_filename, 'r')
   if file then
     local contents = file:read("*a")
@@ -360,6 +367,21 @@ function execute_in_terminal()
       vim.cmd("normal! }j")
   end, 10)
 end
+
+local dap = require"dap"
+dap.configurations.lua = { 
+  { 
+    type = 'nlua', 
+    request = 'attach',
+    name = "Attach to running Neovim instance",
+  }
+}
+dap.adapters.nlua = function(callback, config)
+  callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
+end
+
+require('dap-python').setup('~/micromamba/envs/local_env1/bin/python')
+require('dapui').setup()
 
 EOF
 

@@ -136,7 +136,7 @@ If it is not working in mac, try installing rosetta first. In Application, right
 
 
 #### fzf
-Requirement: install `the_silver_searcher`
+Requirement: install `the_silver_searcher`, `ripgrep`
 To install telescope-fzf-native, make sure to install CMake, make, gcc or Clang as [here](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
 
 #### nvim-treesitter-textobjects
@@ -148,7 +148,7 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 ```
 Also, call
 ```
-:TSInstall python
+:TSInstall python lua vimdoc
 ```
 to install the package in python
 #### OmniSharp
@@ -172,6 +172,9 @@ Fork my version of nvim-tree. To add doc, please run
 ### markdown-preview
 Install nodejs and yarn
 Note that markdown-preview needs a web-browser to open.
+
+### nvim-dap
+To work with python, install python package [debugpy](https://github.com/microsoft/debugpy)
 
 
 ## Upgrade neovim
