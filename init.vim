@@ -20,6 +20,7 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'github/copilot.vim'
+Plug 'kylechui/nvim-surround'
 call plug#end()
 
 set rtp+=/Users/yichenchen/workspace/coc-lists
@@ -101,14 +102,11 @@ tnoremap <D-F> <C-\><C-N>:lua change_terminal_name('
 
 
 "run a block of code
-nmap <D-r> yap<C-w>j<C-\><C-N>pi<CR><D-k>}j
+"nmap <D-r> yap<C-w>j<C-\><C-N>pi<CR><D-k>}j
+nmap <D-r> :lua execute_in_terminal()<CR>
 "run class and function. need ac af for function setup
 nmap <D-u> mz"+yaf<C-w>j%paste<CR><D-k>'z
 nmap <D-c> mz"+yac<C-w>j%paste<CR><D-k>'z
-
-" clipboard path
-noremap <Leader>cw :let t:wd = getcwd()<CR>
-autocmd TabEnter * if exists("t:wd") | exe "cd" t:wd | endif
 
 tmap <D-r> <C-\><C-N>pi 
 tmap <D-'> <C-\><C-N>"+pi
@@ -212,6 +210,11 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+lua << EOF
+vim.g.coc_jump_locations = {{filename = vim.env.HOME .. "/.config/nvim/init.vim", lnum = 1, col = 1, text = "init.vim"}}
+EOF
+
+
 " Use <c-space> to trigger completion.
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
@@ -252,6 +255,7 @@ nmap <leader>rn <Plug>(coc-rename)
 " CocList
 nmap <D-m> :CocList workspaces<CR>
 nmap <D-M> :lua add_workspace('
+nnoremap <silent><nowait> <space>m :<C-u>CocList location<CR>
 
 lua << EOF
 function change_terminal_name(name)
@@ -338,4 +342,24 @@ require("telescope").setup {
   }
 }
 require("telescope").load_extension("fzf")
+require("nvim-surround").setup {}
+
+function execute_in_terminal()
+  vim.cmd("normal! yap")
+  local current_win = vim.api.nvim_get_current_win() 
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.api.nvim_buf_get_option(buf, 'buftype') == 'terminal' then
+      vim.api.nvim_set_current_win(win)
+      break
+    end
+  end
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-N>pi<CR><C-\\><C-N>", true, true, true), "t", false)
+  vim.defer_fn(function()
+      vim.api.nvim_set_current_win(current_win)
+      vim.cmd("normal! }j")
+  end, 10)
+end
+
 EOF
+

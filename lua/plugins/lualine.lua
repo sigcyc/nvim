@@ -1,3 +1,7 @@
+local function get_working_directory()
+  return vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+end
+
 local function get_filename()
    if vim.opt.buftype:get() == 'terminal' then
       return vim.fn.fnamemodify(vim.fn.expand('%'), ':p:h:h:h:t') .. ':' .. vim.fn.fnamemodify(vim.fn.expand('%'), ':p:t')
