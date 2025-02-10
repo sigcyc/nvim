@@ -30,7 +30,7 @@ map_leader("B", "<cmd>HopLineBC<CR>")
 map_leader("gs", "<cmd>Git<CR>")
 map_leader("dv", "<cmd>Gvdiffsplit<CR>")
 map_leader("dq", ":<C-U>call fugitive#DiffClose()<CR>")
-map_leader("gp", "<cmd>Git push oirigin<CR>")
+map_leader("gp", "<cmd>Git push origin<CR>")
 map_leader("gl", "<cmd>Git pull<CR>")
 map_leader("gg", "<cmd>Git log --all --decorate --oneline --graph<CR>")
 
