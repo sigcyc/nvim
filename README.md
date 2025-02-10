@@ -48,7 +48,7 @@ set guifont=* # list all guifont
 
 Some of the plugins will need [nerd fonts](https://github.com/ryanoasis/nerd-fonts).
 To install a patched font, follow the Option 3 and Option 5. Make sure git version is high enough. An example to install Meslo font in option 5:
-```git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
+```
 git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
 cd nerd-fonts
 git sparse-checkout add patched-fonts/BitstreamVeraSansMono
@@ -134,7 +134,8 @@ snip formats tutorials can be found [here](https://github.com/SirVer/ultisnips)
 coc-lists
 If it is not working in mac, try installing rosetta first. In Application, right click safari-> Get Info -> Open using Rosetta will give you the prompt
 
-
+#### mason
+Need to install npm nodejs for pyright
 #### fzf
 Requirement: install `the_silver_searcher`, `ripgrep`
 To install telescope-fzf-native, make sure to install CMake, make, gcc or Clang as [here](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
