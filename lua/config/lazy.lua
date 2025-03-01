@@ -31,6 +31,7 @@ opt.signcolumn = "yes"
 opt.number = true
 opt.relativenumber = true
 opt.clipboard:append("unnamedplus")
+opt.cmdheight = 2
 
 -- Setup lazy.nvim
 require("lazy").setup({

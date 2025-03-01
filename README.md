@@ -90,11 +90,9 @@ We have the following convention: when we focus on a terminal buffer, the termin
 [Do not leave on mouse click](https://github.com/neovim/neovim/pull/16604)
 
 ## Plugins
-First step, use vim-plug for management
-Download plug.vim and put it in the autoload directory
-```
-.local/share/nvim/site/autoload/plug.vim
-```
+First step, use lazy for plugin management.
+Some notes:
+if we set `opt ={}` inside the lazy configuration, lazy will automaticallycall the plugin setup
 
 ### instructions for lua plugin
 To run the lua command in vimscript, call

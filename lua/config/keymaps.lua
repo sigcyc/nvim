@@ -47,7 +47,8 @@ ntmap('Right', 'gt')
 ntmap('F', '<cmd>FzfLua files<CR>')
 ntmap('o', '<cmd>FzfLua buffers<CR>')
 ntmap('s', '<cmd>FzfLua grep_project<CR>')
-ntmap('m', '<cmd>Cdpick<CR>')
+ntmap('m', '<cmd>FzfWorkspaces<CR>')
+vim.keymap.set("n", "<space>m", '<cmd>FzfFiles<CR>')
 
 --- terminal
 ntmap('e', '<cmd>sp <Bar> term<CR>i')
@@ -92,28 +93,40 @@ nmap('c', "mz\"+yac<C-w>j%paste<CR><C-\\><C-N>\'z")
 vim.keymap.set("n", "<Leader>s", ":.,$s/")
 
 --- add workspaces json for fzf-lua
-function add_workspace(name)
-  local workspace_filename = vim.fn.stdpath('config') .. '/lua/config/workspaces.json'
-  local file = io.open(workspace_filename, 'r')
+function add_shortcut(type, name)
+  local filename
+  if type == "workspaces" then
+    filename = vim.fn.stdpath('config') .. '/lua/config/workspaces.json'
+  elseif type == "files" then
+    filename = vim.fn.stdpath('config') .. '/lua/config/files.json'
+  end
+  local file = io.open(filename, 'r')
   if file then
     local contents = file:read("*a")
-    content_json = vim.json.decode(contents)
-    content_json[name] = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+    local content_json = vim.json.decode(contents)
+    if type == "workspaces" then
+      content_json[vim.fn.fnamemodify(vim.fn.getcwd(), ":t")] = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+    elseif type == "files" then
+      content_json[vim.fn.expand("%:t")] = vim.fn.expand('%:p')
+    end
     io.close(file)
     local tkeys = {}
     for k in pairs(content_json) do table.insert(tkeys, k) end
     table.sort(tkeys)
-    local file = io.open(workspace_filename, 'w')
-    file:write('{\n')
-    for idx, k in ipairs(tkeys) do
-      if (idx ~= #tkeys) then
-        file:write("\"", k, "\": \"", content_json[k], "\", \n")
-      else
-        file:write("\"", k, "\": \"", content_json[k], "\"\n")
+    local file_out = io.open(filename, 'w')
+    if file_out then
+      file_out:write('{\n')
+      for idx, k in ipairs(tkeys) do
+        if (idx ~= #tkeys) then
+          file_out:write("\"", k, "\": \"", content_json[k], "\", \n")
+        else
+          file_out:write("\"", k, "\": \"", content_json[k], "\"\n")
+        end
       end
+      file_out:write('}')
+      io.close(file_out)
     end
-    file:write('}')
-    io.close(file)
   end
 end
-nmap('M', ":lua add_workspace('")
+nmap('M', ":lua add_shortcut(\"workspaces\")<CR>")
+vim.keymap.set("n", "<space>M", function() add_shortcut("files") end)

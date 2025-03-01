@@ -1,4 +1,5 @@
 {
 "home": "~", 
+"nerd-fonts": "~/nerd-fonts", 
 "nvim": "~/.config/nvim"
 }
