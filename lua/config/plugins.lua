@@ -34,11 +34,20 @@ map_leader("gp", "<cmd>Git push origin<CR>")
 map_leader("gl", "<cmd>Git pull<CR>")
 map_leader("gg", "<cmd>Git log --all --decorate --oneline --graph<CR>")
 
---- fzf-lua
+--- *fzf-lua*
 local fzf = require('fzf-lua')
-local workspaces = {
-  'nvim|~/.config/nvim',
-}
+--- load workspaces into a table
+local workspaces = {}
+local workspace_filename = vim.fn.stdpath('config') .. '/lua/config/workspaces.json'
+local file = io.open(workspace_filename, 'r')
+if file then
+  local contents = file:read("*a")
+  local data = vim.json.decode(contents)
+  for key, value in pairs(data) do
+    table.insert(workspaces, key .. "|" .. value)
+  end
+  io.close(file)
+end
 -- Define a function that uses fzf-lua to let you pick a directory
 local function pick_and_cd()
   fzf.fzf_exec(workspaces, {

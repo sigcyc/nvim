@@ -27,6 +27,7 @@ opt.shiftwidth = 2
 opt.expandtab = true
 opt.splitbelow = true
 opt.ignorecase = true
+opt.signcolumn = "yes"
 opt.number = true
 opt.relativenumber = true
 opt.clipboard:append("unnamedplus")

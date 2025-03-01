@@ -14,3 +14,7 @@ In this case meta table will have the function that we can call
 * after making a change to a script and to reload it, run
 `:lua package.loaded["config.your_script"] = nil`
 `require("config.your_script")
+
+
+## inspect values:
+print(vim.inspect(workspaces))

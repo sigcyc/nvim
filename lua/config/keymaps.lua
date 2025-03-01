@@ -83,9 +83,37 @@ function execute_in_terminal()
   end, 10)
 end
 nmap('r', ":execute_in_terminal()<CR>")
-tmap('r', "pi")
+tmap('r', "pi") --- vim yank
+tmap('\'', "\"+pi") --- execute clipboard
+nmap('u', "mz\"+yaf<C-w>j%paste<CR><C-\\><C-N>\'z")
+nmap('c', "mz\"+yac<C-w>j%paste<CR><C-\\><C-N>\'z")
 
 --- editting
 vim.keymap.set("n", "<Leader>s", ":.,$s/")
 
-
+--- add workspaces json for fzf-lua
+function add_workspace(name)
+  local workspace_filename = vim.fn.stdpath('config') .. '/lua/config/workspaces.json'
+  local file = io.open(workspace_filename, 'r')
+  if file then
+    local contents = file:read("*a")
+    content_json = vim.json.decode(contents)
+    content_json[name] = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+    io.close(file)
+    local tkeys = {}
+    for k in pairs(content_json) do table.insert(tkeys, k) end
+    table.sort(tkeys)
+    local file = io.open(workspace_filename, 'w')
+    file:write('{\n')
+    for idx, k in ipairs(tkeys) do
+      if (idx ~= #tkeys) then
+        file:write("\"", k, "\": \"", content_json[k], "\", \n")
+      else
+        file:write("\"", k, "\": \"", content_json[k], "\"\n")
+      end
+    end
+    file:write('}')
+    io.close(file)
+  end
+end
+nmap('M', ":lua add_workspace('")
