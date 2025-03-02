@@ -1,19 +1,19 @@
 --- keymaps include all the maps that don't need any plugin
 --- it also includes the Alt commands as those are typically the mostly used keymaps
 
-local function map(mode, shortcut, func)
+local function map(mode, shortcut, func, opt)
   local platform_key = vim.fn.has('mac') == 1 and '<D-' or '<A-'
-  vim.keymap.set(mode, platform_key .. shortcut .. '>', func)
+  vim.keymap.set(mode, platform_key .. shortcut .. '>', func, opt)
 end
-local function nmap(shortcut, func)
-  map('n', shortcut, func)
+local function nmap(shortcut, func, opt)
+  map('n', shortcut, func, opt)
 end
-local function tmap(shortcut, func)
-  map('t', shortcut, "<C-\\><C-N>" .. func)
+local function tmap(shortcut, func, opt)
+  map('t', shortcut, "<C-\\><C-N>" .. func, opt)
 end
-local function ntmap(shortcut, func)
-  nmap(shortcut, func)
-  tmap(shortcut, func)
+local function ntmap(shortcut, func, opt)
+  nmap(shortcut, func, opt)
+  tmap(shortcut, func, opt)
 end
 
 --- movement
@@ -128,8 +128,9 @@ end
 nmap('r', ":lua execute_in_terminal()<CR>")
 tmap('r', "pi") --- vim yank
 tmap('\'', "\"+pi") --- execute clipboard
-nmap('u', "mz\"+yaf<C-w>j%paste<CR><C-\\><C-N>\'z")
-nmap('c', "mz\"+yac<C-w>j%paste<CR><C-\\><C-N>\'z")
+nmap('u', "mz\"+yaf<C-w>j%paste<CR><C-\\><C-N><C-w>k\'z", {remap=true})
+nmap('c', "mz\"+yac<C-w>j%paste<CR><C-\\><C-N><C-w>k\'z", {remap=true})
+
 
 --- editting
 vim.keymap.set("n", "<Leader>s", ":.,$s/")
