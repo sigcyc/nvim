@@ -128,8 +128,18 @@ end
 nmap('r', ":lua execute_in_terminal()<CR>")
 tmap('r', "pi") --- vim yank
 tmap('\'', "\"+pi") --- execute clipboard
-nmap('u', "mz\"+yaf<C-w>j%paste<CR><C-\\><C-N><C-w>k\'z", {remap=true})
-nmap('c', "mz\"+yac<C-w>j%paste<CR><C-\\><C-N><C-w>k\'z", {remap=true})
+nmap('u', function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("mz\"+yaf", true, true, true), "m", false)
+  vim.defer_fn(function()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>j%paste<CR><C-\\><C-N><C-w>k\'z", true, true, true), "m", false)
+  end, 300)
+end)
+nmap('c', function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("mz\"+yac", true, true, true), "m", false)
+  vim.defer_fn(function ()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>j%paste<CR><C-\\><C-N><C-w>k\'z", true, true, true), "m", false)
+  end, 300)
+end)
 
 
 --- editting
