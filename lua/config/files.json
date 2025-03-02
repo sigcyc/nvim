@@ -1,4 +1,5 @@
 {
 "": "", 
-"init.lua": "/home/simon/.config/nvim/init.lua"
+"init.lua": "/home/simon/.config/nvim/init.lua", 
+"init.vim": "/home/simon/.config/nvim/init.vim"
 }

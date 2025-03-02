@@ -47,7 +47,14 @@ require("lazy").setup({
     },
     "smoka7/hop.nvim",
     "tpope/vim-fugitive",
-    "ibhagwan/fzf-lua",
+    {
+      'stevearc/aerial.nvim',
+      opts = {},
+      dependencies = {
+         "nvim-treesitter/nvim-treesitter",
+         "nvim-tree/nvim-web-devicons"
+      },
+    },
     { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...},
     { import = "plugins" },
   },
