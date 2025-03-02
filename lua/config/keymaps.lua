@@ -125,7 +125,7 @@ function execute_in_terminal()
       vim.cmd("normal! }j")
   end, 10)
 end
-nmap('r', ":execute_in_terminal()<CR>")
+nmap('r', ":lua execute_in_terminal()<CR>")
 tmap('r', "pi") --- vim yank
 tmap('\'', "\"+pi") --- execute clipboard
 nmap('u', "mz\"+yaf<C-w>j%paste<CR><C-\\><C-N>\'z")
