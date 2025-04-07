@@ -46,6 +46,7 @@ require("lazy").setup({
       }
     },
     "smoka7/hop.nvim",
+    "numToStr/Comment.nvim",
     "tpope/vim-fugitive",
     {
       'stevearc/aerial.nvim',

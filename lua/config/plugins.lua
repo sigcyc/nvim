@@ -34,3 +34,5 @@ map_leader("gp", "<cmd>Git push origin<CR>")
 map_leader("gl", "<cmd>Git pull<CR>")
 map_leader("gg", "<cmd>Git log --all --decorate --oneline --graph<CR>")
 
+require('Comment').setup()
+vim.keymap.set("v", "<Leader>cc", "gc", {remap=true, silent=true})

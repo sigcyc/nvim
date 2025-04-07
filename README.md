@@ -9,6 +9,11 @@ Check the [link](https://docs.github.com/en/authentication/keeping-your-account-
 Check the [link](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 # Neovim setup
+`sudo apt-get install npm clang git xclip`
+npm: used in pyright
+git: used to download github
+xclip: used to copy password
+xclang: nvim-treesitter
 
 ## install vim
 First step: install neovim, neovim-qt
