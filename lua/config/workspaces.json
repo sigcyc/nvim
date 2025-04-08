@@ -1,5 +1,7 @@
 {
+"data": "~/data", 
 "home": "~", 
+"macro": "~/workspace/macro", 
 "nerd-fonts": "~/nerd-fonts", 
 "nvim": "~/.config/nvim"
 }

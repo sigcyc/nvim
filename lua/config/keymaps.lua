@@ -93,6 +93,7 @@ nmap('M', ":lua add_shortcut(\"workspaces\")<CR>")
 vim.keymap.set("n", "<space>M", function() add_shortcut("files") end)
 
 --- terminal
+map('t', 'p', '%paste<CR>')
 ntmap('e', '<cmd>sp <Bar> term<CR>i')
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",
