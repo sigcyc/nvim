@@ -32,6 +32,7 @@ opt.number = true
 opt.relativenumber = true
 opt.clipboard:append("unnamedplus")
 opt.cmdheight = 2
+opt.guifont = "JetBrainsMono Nerd Font Mono:h14"
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -46,8 +47,9 @@ require("lazy").setup({
       }
     },
     "smoka7/hop.nvim",
-    "numToStr/Comment.nvim",
+    "preservim/nerdcommenter",
     "tpope/vim-fugitive",
+    "psf/black",
     {
       'stevearc/aerial.nvim',
       opts = {},

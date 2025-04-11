@@ -146,4 +146,5 @@ end)
 --- editting
 vim.keymap.set("n", "<Leader>s", ":.,$s/")
 vim.keymap.set("n", "<Leader>db", "oimport pdb; pdb.set_trace()<ESC>")
+vim.keymap.set("n", "<Leader>f", ":Black<CR>")
 

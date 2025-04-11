@@ -1,7 +1,8 @@
-colorscheme gruvbox
+" colorscheme gruvbox
 
 " Enable Mouse
 set mouse=a
+set guicursor=a:blinkon0
 
 " Disable GUI Tabline
 if exists(':GuiTabline')
