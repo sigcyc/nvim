@@ -13,7 +13,7 @@ return {
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
       -- See the full "keymap" documentation for information on defining your own keymap.
       keymap = {
-        preset = 'super-tab',
+        preset = 'default',
         ['<C-k>'] = { 'select_prev', 'fallback' },
         ['<C-j>'] = { 'select_next', 'fallback' },
       },
@@ -27,7 +27,7 @@ return {
         -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono'
       },
-
+      signature = { enabled = true },
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {

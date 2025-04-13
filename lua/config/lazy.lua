@@ -50,6 +50,7 @@ require("lazy").setup({
     "preservim/nerdcommenter",
     "tpope/vim-fugitive",
     "psf/black",
+    "rafamadriz/friendly-snippets",
     {
       'stevearc/aerial.nvim',
       opts = {},
