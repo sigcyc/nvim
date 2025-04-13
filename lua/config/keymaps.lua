@@ -16,6 +16,11 @@ local function ntmap(shortcut, func, opt)
   tmap(shortcut, func, opt)
 end
 
+local function ntmapi(shortcut, func, opt)
+  nmap(shortcut, func, opt)
+  tmap(shortcut, func .. 'i', opt)
+end
+
 --- movement
 ntmap('k', '<C-w>k')
 ntmap('l', '<C-w>l')
@@ -27,19 +32,19 @@ ntmap('d', '<C-u>')
 --- window
 ntmap('w', '<cmd>hid<CR>')
 ntmap('q', '<cmd>q<CR>')
-ntmap('v', '<cmd>vsplit<CR>')
-ntmap('i', '<cmd>split<CR>')
-ntmap('t', '<cmd>tabnew<CR>')
-ntmap('x', '<C-w>x')
-ntmap('H', '<C-w>H')
-ntmap('J', '<C-w>J')
-ntmap('K', '<C-w>K')
-ntmap('L', '<C-w>L')
-ntmap('-', '<C-w>_') --- maximize that window
-ntmap('=', '<C-w>=')
-ntmap('\\', '<C-w><Bar>')
-ntmap('.', '2<C-w>>')
-ntmap(',', '2<C-w><')
+ntmapi('v', '<cmd>vsplit<CR>')
+ntmapi('i', '<cmd>split<CR>')
+ntmapi('t', '<cmd>tabnew<CR>')
+ntmapi('x', '<C-w>x')
+ntmapi('H', '<C-w>H')
+ntmapi('J', '<C-w>J')
+ntmapi('K', '<C-w>K')
+ntmapi('L', '<C-w>L')
+ntmapi('-', '<C-w>_') --- maximize that window
+ntmapi('=', '<C-w>=')
+ntmapi('\\', '<C-w><Bar>')
+ntmapi('.', '2<C-w>>')
+ntmapi(',', '2<C-w><')
 ntmap('Left', 'gT')
 ntmap('Right', 'gt')
 
