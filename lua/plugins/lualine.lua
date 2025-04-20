@@ -26,7 +26,7 @@ return {
         sections = {
           lualine_a = {'mode'},
           lualine_b = {{'diagnostics', sources={'nvim_lsp', 'coc'}}},
-          lualine_c = {get_filename},
+          lualine_c = {{'filename', path = 3}},
           lualine_x = {},
           lualine_y = {'progress'},
           lualine_z = {'location'}

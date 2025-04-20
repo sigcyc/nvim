@@ -33,6 +33,7 @@ opt.relativenumber = true
 opt.clipboard:append("unnamedplus")
 opt.cmdheight = 2
 opt.guifont = "JetBrainsMono Nerd Font Mono:h14"
+opt.laststatus = 3
 
 -- Setup lazy.nvim
 require("lazy").setup({
