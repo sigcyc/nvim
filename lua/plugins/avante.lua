@@ -8,7 +8,7 @@ return {
       -- for example
       provider = "gemini",
       gemini = {
-        endpoint = "https://generativelanguage.googleapis.com",
+        endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
         model = "gemini-2.5-pro-exp-03-25", -- your desired model (or use gpt-4o, etc.)
         timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
         temperature = 0,
