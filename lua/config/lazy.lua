@@ -34,6 +34,14 @@ opt.clipboard:append("unnamedplus")
 opt.cmdheight = 2
 opt.guifont = "JetBrainsMono Nerd Font Mono:h14"
 
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.wo.number = true
+    vim.wo.relativenumber = true
+  end,
+})
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
@@ -51,6 +59,12 @@ require("lazy").setup({
     "tpope/vim-fugitive",
     "psf/black",
     "rafamadriz/friendly-snippets",
+    {
+      "vim-test/vim-test",
+      config = function()
+        vim.g["test#strategy"] = "neovim"
+      end,
+    },
     {
       'stevearc/aerial.nvim',
       opts = {},

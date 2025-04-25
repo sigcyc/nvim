@@ -58,6 +58,10 @@ vim.keymap.set("n", "<space>m", '<cmd>FzfFiles<CR>')
 --- aerial
 nmap('g', '<cmd>AerialToggle!<CR>')
 
+--- vimtest
+nmap('T', '<cmd>TestFile<CR>')
+nmap('N', '<cmd>TestNearest<CR>')
+
 --- add workspaces json for fzf-lua
 function add_shortcut(type, name)
   local filename
@@ -99,6 +103,7 @@ vim.keymap.set("n", "<space>M", function() add_shortcut("files") end)
 
 --- terminal
 map('t', 'p', '%paste<CR>')
+map('t', 'R', "%autoreload<CR>")
 ntmap('e', '<cmd>sp <Bar> term<CR>i')
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",

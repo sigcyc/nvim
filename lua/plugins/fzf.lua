@@ -53,6 +53,7 @@ return {
         })
       end
       vim.api.nvim_create_user_command('FzfFiles', pick_and_open, {})
+      vim.keymap.set('n', '<Leader>gb', '<cmd>FzfLua git_bcommits<CR>')
     end
   }
 }
