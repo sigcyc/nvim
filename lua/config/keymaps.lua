@@ -2,7 +2,7 @@
 --- it also includes the Alt commands as those are typically the mostly used keymaps
 
 local function map(mode, shortcut, func, opt)
-  local platform_key = vim.fn.has('mac') == 1 and '<D-' or '<A-'
+  local platform_key = vim.fn.has('mac') == 1 and '<M-' or '<A-'
   vim.keymap.set(mode, platform_key .. shortcut .. '>', func, opt)
 end
 local function nmap(shortcut, func, opt)
@@ -158,3 +158,6 @@ vim.keymap.set("n", "<Leader>s", ":.,$s/")
 vim.keymap.set("n", "<Leader>db", "oimport pdb; pdb.set_trace()<ESC>")
 vim.keymap.set("n", "<Leader>f", ":Black<CR>")
 
+--- avante
+map('i', 'a', '<cmd>AvanteFocus<CR>')
+map('n', 'a', '<cmd>AvanteFocus<CR>')

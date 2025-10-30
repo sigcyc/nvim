@@ -19,6 +19,8 @@ vim.opt.rtp:prepend(lazypath)
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = ","
+vim.g.neovide_input_macos_option_key_is_meta = 'both'
+vim.g.neovide_cursor_animation_length = 0
 
 local opt = vim.opt
 opt.winbar = "%f"

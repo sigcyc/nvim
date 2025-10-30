@@ -1,21 +1,40 @@
+local credentials = require("config.credentials")
+
+credentials.ensure_gemini_env()
+
 return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
-    opts = {
-      -- add any opts here
-      -- for example
-      provider = "gemini",
-      gemini = {
-        endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-        model = "gemini-2.5-pro-exp-03-25", -- your desired model (or use gpt-4o, etc.)
-        timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-        temperature = 0,
-        max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-        --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-      },
-    },
+    opts = function()
+      local gemini_key = credentials.gemini_api_key
+      local acp_env = {
+        NODE_NO_WARNINGS = "1",
+      }
+      if gemini_key and gemini_key ~= "" then acp_env.GEMINI_API_KEY = gemini_key end
+
+      return {
+        provider = "gemini-cli",
+        acp_providers = {
+          ["gemini-cli"] = {
+            command = "gemini",
+            args = { "--experimental-acp" },
+            env = acp_env,
+          },
+        },
+        providers = {
+          gemini = {
+            endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+            model = "gemini-2.5-pro", -- your desired model (or use gpt-4o, etc.)
+            timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+            temperature = 0,
+            max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+            --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+          },
+        },
+      }
+    end,
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
