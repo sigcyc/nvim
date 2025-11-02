@@ -26,8 +26,15 @@ return {
       dependencies = {'saghen/blink.cmp'},
       config = function()
         local capabilities = require('blink.cmp').get_lsp_capabilities()
-        require("lspconfig").lua_ls.setup{capabilities = capabilities}
-        require("lspconfig").pyright.setup{capabilities = capabilities}
+
+        local function enable(server)
+          vim.lsp.config(server, { capabilities = capabilities })
+          vim.lsp.enable(server)
+        end
+
+        enable("lua_ls")
+        enable("pyright")
+
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
