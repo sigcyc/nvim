@@ -159,5 +159,5 @@ vim.keymap.set("n", "<Leader>db", "oimport pdb; pdb.set_trace()<ESC>")
 vim.keymap.set("n", "<Leader>f", ":Black<CR>")
 
 --- avante
-map('i', 'a', '<cmd>AvanteFocus<CR>')
-map('n', 'a', '<cmd>AvanteFocus<CR>')
+map('i', 'a', '<cmd>AvanteToggle<CR>')
+map('n', 'a', '<cmd>AvanteToggle<CR>')

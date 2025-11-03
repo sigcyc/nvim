@@ -13,7 +13,11 @@ require("neo-tree").setup{
         ["R"] = "rename",
         ["o"] = "open",
         ["i"] = "toggle_hidden",
-        ["u"] = "navigate_up"
+        ["u"] = "navigate_up",
+        ["c"] = function(state)
+          local node = state.tree:get_node()
+          vim.cmd("let @+=\""..node.path.."\"")
+        end,
       }
     }
   }
