@@ -4,7 +4,7 @@ return {
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
     opts = {
-      provider = "gemini-cli",
+      provider = "codex",
       acp_providers = {
         ["gemini-cli"] = {
           command = "gemini",
@@ -12,6 +12,13 @@ return {
           env = {
             NODE_NO_WARNINGS = "1",
             GEMINI_API_KEY = os.getenv("GEMINI_API_KEY"),
+          },
+        },
+        ["codex"] = {
+          command = "codex-acp",
+          env = {
+            NODE_NO_WARNINGS = "1",
+            OPENAI_API_KEY = os.getenv("OPENAI_API_KEY"),
           },
         },
       }
