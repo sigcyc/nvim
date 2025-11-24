@@ -158,6 +158,6 @@ vim.keymap.set("n", "<Leader>s", ":.,$s/")
 vim.keymap.set("n", "<Leader>db", "oimport pdb; pdb.set_trace()<ESC>")
 vim.keymap.set("n", "<Leader>f", ":Black<CR>")
 
---- avante
-map('i', 'a', '<cmd>AvanteToggle<CR>')
-map('n', 'a', '<cmd>AvanteToggle<CR>')
+--- codecompanion
+map('i', 'a', ':CodeCompanionChat<CR>i')
+map('v', 'a', ':CodeCompanionChat<CR>o')
