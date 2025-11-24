@@ -51,7 +51,7 @@ ntmap('Right', 'gt')
 --- fzf-lua
 ntmap('F', '<cmd>FzfLua files<CR>')
 ntmap('o', '<cmd>FzfLua buffers<CR>')
-ntmap('s', '<cmd>FzfLua grep_project<CR>')
+ntmap('s', '<cmd>FzfLua grep search=""<CR>')
 ntmap('m', '<cmd>FzfWorkspaces<CR>')
 vim.keymap.set("n", "<space>m", '<cmd>FzfFiles<CR>')
 
