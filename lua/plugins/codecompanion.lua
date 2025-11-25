@@ -9,6 +9,12 @@ return {
               env = { OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") },
             })
           end,
+          gemini_cli = function()
+            return require("codecompanion.adapters").extend("gemini_cli", {
+              defaults = { auth_method = "gemini-api-key"},
+              env = { GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") },
+            })
+          end,
         },
       },
       strategies = {
