@@ -57,6 +57,7 @@ require("lazy").setup({
         "MunifTanjim/nui.nvim",
       }
     },
+
     "smoka7/hop.nvim",
     "preservim/nerdcommenter",
     "tpope/vim-fugitive",
@@ -77,6 +78,14 @@ require("lazy").setup({
       },
     },
     { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true, opts = ...},
+    {
+      "kylechui/nvim-surround",
+      version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+        require("nvim-surround").setup()
+      end
+    },
     { import = "plugins" },
   },
   -- Configure any other settings here. See the documentation for more details.
