@@ -1,8 +1,16 @@
-return {
+  return {
     "olimorris/codecompanion.nvim",
     opts = {
       adapters = {
         acp = {
+          claude_code = function()
+            return require("codecompanion.adapters").extend("claude_code", {
+              env = {
+                ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
+                ANTHROPIC_MODEL = "claude-opus-4-5-20251101",
+              },
+            })
+          end,
           codex = function()
             return require("codecompanion.adapters").extend("codex", {
               defaults = { auth_method = "openai-api-key" },

@@ -1,4 +1,5 @@
 {
+"ds_types.yaml": "/Users/yichenchen/workspace/cyc/cyc/files/ds_types.yaml", 
 "hello_world.py": "/home/simon/ml_experiments/hello_world.py", 
 "init.lua": "/home/simon/.config/nvim/init.lua", 
 "keymaps.lua": "/home/simon/.config/nvim/lua/config/keymaps.lua"

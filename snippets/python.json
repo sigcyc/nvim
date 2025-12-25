@@ -6,5 +6,12 @@
       "if __name__ == \"__main__\":",
       "\t${1:mname}"
     ]
+  },
+  "polars_c": {
+    "prefix": "c",
+    "body": [
+      "pl.col(\"${1}\")"
+    ]
   }
 }
+

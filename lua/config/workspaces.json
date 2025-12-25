@@ -1,6 +1,7 @@
 {
 "cyc": "~/workspace/cyc", 
 "data": "~/data", 
+"futures_report": "~/workspace/futures_report", 
 "home": "~", 
 "macro": "~/workspace/macro", 
 "ml_experiments": "~/workspace/ml_experiments", 
