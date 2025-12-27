@@ -157,6 +157,13 @@ end)
 vim.keymap.set("n", "<Leader>s", ":.,$s/")
 vim.keymap.set("n", "<Leader>db", "oimport pdb; pdb.set_trace()<ESC>")
 vim.keymap.set("n", "<Leader>f", ":Black<CR>")
+vim.keymap.set("i", "<C-.>.", function()
+  vim.snippet.expand("[\"${1}\"]${0}")
+end)
+vim.keymap.set("i", "<C-.>c", function()
+  vim.snippet.expand("pl.col(\"${1}\")${0}")
+end)
+
 
 --- codecompanion
 map('n', 'a', ':CodeCompanionChat<CR>i')

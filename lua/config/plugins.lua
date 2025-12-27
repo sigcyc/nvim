@@ -9,6 +9,7 @@ require("neo-tree").setup{
   filesystem = {
     window = {
       mappings = {
+        ["/"] = "none",
         ["r"] = "refresh",
         ["R"] = "rename",
         ["o"] = "open",
