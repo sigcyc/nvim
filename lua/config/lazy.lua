@@ -62,6 +62,7 @@ require("lazy").setup({
     "preservim/nerdcommenter",
     "tpope/vim-fugitive",
     "psf/black",
+    "Vimjas/vim-python-pep8-indent",
     "rafamadriz/friendly-snippets",
     {
       "vim-test/vim-test",

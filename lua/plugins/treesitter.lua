@@ -8,7 +8,7 @@ return {
           ensure_installed = {"lua", "vim", "vimdoc", "python", "c_sharp" },
           sync_install = false,
           highlight = { enable = true },
-          indent = { enable = true },
+          indent = { enable = true, disable = { "python" } },
           textobjects = {
             select = {
               enable = true,
