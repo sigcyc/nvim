@@ -7,5 +7,6 @@
 "ml_experiments": "~/workspace/ml_experiments", 
 "nerd-fonts": "~/nerd-fonts", 
 "nvim": "~/.config/nvim", 
-"vibe_scripts": "~/workspace/vibe_scripts"
+"vibe_scripts": "~/workspace/vibe_scripts",
+"workspace": "~/workspace/"
 }
