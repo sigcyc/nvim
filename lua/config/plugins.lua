@@ -38,3 +38,9 @@ map_leader("n", "dq", ":<C-U>call fugitive#DiffClose()<CR>")
 map_leader("n", "gp", "<cmd>Git push origin<CR>")
 map_leader("n", "gl", "<cmd>Git pull<CR>")
 map_leader("n", "gg", "<cmd>Git log --all --decorate --oneline --graph<CR>")
+
+require('nvim-treesitter').install { 'python'}
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'python' },
+  callback = function() vim.treesitter.start() end,
+})

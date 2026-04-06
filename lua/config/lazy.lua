@@ -36,6 +36,7 @@ opt.clipboard:append("unnamedplus")
 opt.cmdheight = 2
 opt.guifont = "JetBrainsMono Nerd Font Mono:h14"
 opt.laststatus = 3
+opt.background = "dark"
 
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "*",
@@ -86,6 +87,16 @@ require("lazy").setup({
       config = function()
         require("nvim-surround").setup()
       end
+    },
+    {
+      "MeanderingProgrammer/render-markdown.nvim",
+      opts = {
+        enabled = false,
+      },
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-tree/nvim-web-devicons",
+      },
     },
     { import = "plugins" },
   },

@@ -21,7 +21,7 @@ return {
           component_separators = { left = '', right = ''},
           section_separators = { left = '', right = ''},
           disabled_filetypes = {},
-          always_divide_middle = true,
+          always_divide_middle = false,
         },
         sections = {
           lualine_a = {'mode'},
@@ -40,12 +40,23 @@ return {
           lualine_z = {}
         },
         tabline = {
-          lualine_a = {get_working_directory},
-          lualine_b = {'filename'},
+          lualine_a = {
+            {
+              'tabs',
+              mode = 1,
+              max_length = vim.o.columns,
+              section_separators = { left = '', right = '' },
+              component_separators = { left = '|', right = '|' },
+              fmt = function(_, context)
+                return vim.fn.fnamemodify(vim.fn.getcwd(-1, context.tabnr), ':t')
+              end,
+            }
+          },
+          lualine_b = {},
           lualine_c = {},
           lualine_x = {},
           lualine_y = {},
-          lualine_z = {'tabs'}
+          lualine_z = {}
         },
         extensions = {}
       }

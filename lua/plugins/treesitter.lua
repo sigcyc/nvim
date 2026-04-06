@@ -1,30 +1,26 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function ()
-      local configs = require("nvim-treesitter.configs")
-      configs.setup({
-          ensure_installed = {"lua", "vim", "vimdoc", "python", "c_sharp" },
-          sync_install = false,
-          highlight = { enable = true },
-          indent = { enable = true, disable = { "python" } },
-          textobjects = {
-            select = {
-              enable = true,
-              -- Automatically jump forward to textobj, similar to targets.vim 
-              lookahead = true,
-              keymaps = {
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
-                ["ic"] = "@class.inner",
-                ["as"] = "@statement.outer"
-              },
-            },
-          },
-        })
-    end
+    lazy = false,
+    build = ":TSUpdate"
   },
-  "nvim-treesitter/nvim-treesitter-textobjects",
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+            ["as"] = "@statement.outer",
+          },
+        },
+      },
+    },
+  },
 }

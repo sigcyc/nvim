@@ -1,12 +1,13 @@
 {
 "cyc": "~/workspace/cyc", 
 "data": "~/workspace/data", 
+"data_scripts": "~/workspace/data_scripts", 
+"df_view": "~/workspace/df_view", 
 "futures_report": "~/workspace/futures_report", 
 "home": "~", 
 "macro": "~/workspace/macro", 
 "ml_experiments": "~/workspace/ml_experiments", 
 "nerd-fonts": "~/nerd-fonts", 
 "nvim": "~/.config/nvim", 
-"vibe_scripts": "~/workspace/vibe_scripts",
 "workspace": "~/workspace/"
 }

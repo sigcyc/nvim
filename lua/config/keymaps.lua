@@ -47,6 +47,8 @@ ntmapi('.', '2<C-w>>')
 ntmapi(',', '2<C-w><')
 ntmap('Left', 'gT')
 ntmap('Right', 'gt')
+vim.keymap.set({'n', 't'}, '<D-A-Left>', '<cmd>tabmove -1<CR>')
+vim.keymap.set({'n', 't'}, '<D-A-Right>', '<cmd>tabmove +1<CR>')
 
 --- fzf-lua
 ntmap('F', '<cmd>FzfLua files<CR>')
