@@ -49,6 +49,9 @@ ntmap('Left', 'gT')
 ntmap('Right', 'gt')
 vim.keymap.set({'n', 't'}, '<D-A-Left>', '<cmd>tabmove -1<CR>')
 vim.keymap.set({'n', 't'}, '<D-A-Right>', '<cmd>tabmove +1<CR>')
+for i = 1, 5 do
+  ntmap(tostring(i), '<cmd>tabn ' .. i .. '<CR>')
+end
 
 --- fzf-lua
 ntmap('F', '<cmd>FzfLua files<CR>')
@@ -177,6 +180,19 @@ vim.keymap.set("i", "<C-.>d", function()
   vim.snippet.expand("pl.date(${1}, ${2}, ${3})${0}")
 end)
 
+
+--- ipython
+vim.keymap.set("n", "<Leader>th", function()
+  vim.cmd("split | term")
+  vim.defer_fn(function()
+    local chan = vim.b.terminal_job_id
+    vim.fn.chansend(chan, "ipython\n")
+    vim.defer_fn(function()
+      vim.fn.chansend(chan, "from cyc import *\n")
+      vim.cmd("startinsert")
+    end, 100)
+  end, 10)
+end)
 
 --- codecompanion
 map('n', 'a', ':CodeCompanionChat<CR>i')
