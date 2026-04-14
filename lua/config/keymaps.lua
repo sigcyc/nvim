@@ -32,6 +32,7 @@ ntmap('d', '<C-u>')
 --- window
 ntmap('w', '<cmd>hid<CR>')
 ntmap('q', '<cmd>q<CR>')
+ntmap('Q', '<cmd>q!<CR>')
 ntmapi('v', '<cmd>vsplit<CR>')
 ntmapi('i', '<cmd>split<CR>')
 ntmapi('t', '<cmd>tabnew<CR>')
@@ -128,12 +129,19 @@ tmap('F', '<cmd>change_terminal_name(vim.fn.input("terminal name: "))<CR>')
 function execute_in_terminal()
   vim.cmd("normal! yap")
   local current_win = vim.api.nvim_get_current_win()
+  local target_win, best_row, best_col = nil, -1, math.huge
   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
     local buf = vim.api.nvim_win_get_buf(win)
     if vim.bo[buf].buftype == 'terminal' then
-      vim.api.nvim_set_current_win(win)
-      break
+      local pos = vim.api.nvim_win_get_position(win)
+      local row, col = pos[1], pos[2]
+      if row > best_row or (row == best_row and col < best_col) then
+        target_win, best_row, best_col = win, row, col
+      end
     end
+  end
+  if target_win then
+    vim.api.nvim_set_current_win(target_win)
   end
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-N>pi<CR><C-\\><C-N>", true, true, true), "t", false)
   vim.defer_fn(function()
