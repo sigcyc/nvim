@@ -21,6 +21,7 @@ local function ntmapi(shortcut, func, opt)
   tmap(shortcut, func .. 'i', opt)
 end
 
+
 --- movement
 ntmap('k', '<C-w>k')
 ntmap('l', '<C-w>l')
@@ -172,22 +173,15 @@ vim.keymap.set("n", "<Leader>db", "oimport pdb; pdb.set_trace()<ESC>")
 vim.keymap.set("n", "<Leader>f", ":Black<CR>")
 map("n", "\'", "ysiw\"", { remap = true })
 map("i", "\'", "ysiw\"", { remap = true })
-vim.keymap.set("i", "<C-.>.", function()
-  vim.snippet.expand("[\"${1}\"]${0}")
-end)
-vim.keymap.set("i", "<C-.>c", function()
-  vim.snippet.expand("pl.col(\"${1}\")${0}")
-end)
-vim.keymap.set("i", "<C-.>a", function()
-  vim.snippet.expand(".alias(\"${1}\")${0}")
-end)
-vim.keymap.set("i", "<C-.>w", function()
-  vim.snippet.expand(".with_columns(${1})${0}")
-end)
-vim.keymap.set("i", "<C-.>d", function()
-  vim.snippet.expand("pl.date(${1}, ${2}, ${3})${0}")
-end)
-
+local function snip(lhs, body)
+  vim.keymap.set("i", "<C-.>" .. lhs, function() vim.snippet.expand(body) end)
+end
+snip(".", '["${1}"]${0}')
+snip("c", 'col("${1}")${0}')
+snip("a", '.alias("${1}")${0}')
+snip("w", ".with_columns(${1})${0}")
+snip("d", "pl.date(${1}, ${2}, ${3})${0}")
+snip("t", ".cut([${1}], include_breaks=True)${0}")
 
 --- ipython
 vim.keymap.set("n", "<Leader>th", function()
