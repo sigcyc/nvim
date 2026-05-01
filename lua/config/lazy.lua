@@ -58,8 +58,6 @@ require("lazy").setup({
         "MunifTanjim/nui.nvim",
       }
     },
-
-    "smoka7/hop.nvim",
     "preservim/nerdcommenter",
     "tpope/vim-fugitive",
     "psf/black",

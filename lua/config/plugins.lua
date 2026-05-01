@@ -25,12 +25,6 @@ require("neo-tree").setup{
 }
 map_leader("n", "n", "<cmd>Neotree toggle<CR>")
 
-require('hop').setup()
-map_leader({"n", "v"}, "w", "<cmd>HopWordAC<CR>")
-map_leader({"n", "v"}, "W", "<cmd>HopLineAC<CR>")
-map_leader({"n", "v"}, "b", "<cmd>HopWordBC<CR>")
-map_leader({"n", "v"}, "B", "<cmd>HopLineBC<CR>")
-
 --- fugitive
 map_leader("n", "gs", "<cmd>Git<CR>")
 map_leader("n", "dv", "<cmd>Gvdiffsplit<CR>")
