@@ -173,15 +173,7 @@ vim.keymap.set("n", "<Leader>db", "oimport pdb; pdb.set_trace()<ESC>")
 vim.keymap.set("n", "<Leader>f", ":Black<CR>")
 map("n", "\'", "ysiw\"", { remap = true })
 map("i", "\'", "ysiw\"", { remap = true })
-local function snip(lhs, body)
-  vim.keymap.set("i", "<C-.>" .. lhs, function() vim.snippet.expand(body) end)
-end
-snip(".", '["${1}"]${0}')
-snip("c", 'col("${1}")${0}')
-snip("a", '.alias("${1}")${0}')
-snip("w", ".with_columns(${1})${0}")
-snip("d", "pl.date(${1}, ${2}, ${3})${0}")
-snip("t", ".cut([${1}], include_breaks=True)${0}")
+require("config.snippets")
 
 --- ipython
 vim.keymap.set("n", "<Leader>th", function()
