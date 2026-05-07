@@ -1,4 +1,5 @@
 {
+"a_futures": "~/workspace/a_futures", 
 "cyc": "~/workspace/cyc", 
 "data": "~/workspace/data", 
 "data_scripts": "~/workspace/data_scripts", 
@@ -9,5 +10,5 @@
 "ml_experiments": "~/workspace/ml_experiments", 
 "nerd-fonts": "~/nerd-fonts", 
 "nvim": "~/.config/nvim", 
-"workspace": "~/workspace/"
+"workspace": "~/workspace"
 }

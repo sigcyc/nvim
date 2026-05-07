@@ -20,7 +20,8 @@ def main(
     date: str = "20260326",
     write: bool = False,
 ):
-    ${1:df = pl.DataFrame()}
+    ${1:df = Df.load_data(get_df_type_parent(DF_TYPE), date)}
+    ${0}
 
     if write:
         path = get_data_path(DF_TYPE) / f"{date}.parquet"
