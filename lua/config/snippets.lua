@@ -8,6 +8,7 @@ snip("a", '.alias("${1}")${0}')
 snip("w", ".with_columns(${1})${0}")
 snip("d", "pl.date(${1}, ${2}, ${3})${0}")
 snip("t", ".cut([${1}], include_breaks=True)${0}")
+snip("g", ".group_by(${1:groups}).agg(${2}).sort($1)$0")
 snip("s", [[import typer
 import polars as pl
 from pathlib import Path
@@ -20,7 +21,6 @@ def main(
     date: str = "20260326",
     write: bool = False,
 ):
-    ${1:df = Df.load_data(get_df_type_parent(DF_TYPE), date)}
     ${0}
 
     if write:

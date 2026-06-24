@@ -29,6 +29,8 @@ ntmap('j', '<C-w>j')
 ntmap('h', '<C-w>h')
 ntmap('f', '<C-d>')
 ntmap('d', '<C-u>')
+map('v', 'f', '<C-d>')
+map('v', 'd', '<C-u>')
 
 --- window
 ntmap('w', '<cmd>hid<CR>')
