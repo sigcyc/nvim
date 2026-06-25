@@ -1,0 +1,22 @@
+# --- Transient Neovim logs / error dumps (regenerated at runtime) ---
+*.log
+.nvimlog
+error.msg
+
+# --- npm: never commit installed deps ---
+# No npm project lives here anymore (codex-acp is a Homebrew global install),
+# but keep this so an ad-hoc `npm install` never drops a node_modules into git.
+node_modules/
+
+# --- Editor swap / backup / undo files ---
+*.swp
+*.swo
+*~
+*.un~
+
+# --- macOS ---
+.DS_Store
+
+# Note: lazy.nvim's lazy-lock.json is intentionally tracked (NOT ignored) so
+# plugin versions stay pinned and reproducible — `:Lazy restore` can roll the
+# whole plugin set back to the committed commits. Add it here to opt out.
