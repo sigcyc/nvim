@@ -12,9 +12,10 @@
             })
           end,
           codex = function()
+            -- Use the ChatGPT/Codex subscription via `codex login`, not the API key.
+            -- Requires the `codex-acp` binary on PATH and a ChatGPT login in ~/.codex.
             return require("codecompanion.adapters").extend("codex", {
-              defaults = { auth_method = "openai-api-key" },
-              env = { OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") },
+              defaults = { auth_method = "chatgpt" },
             })
           end,
           gemini_cli = function()
